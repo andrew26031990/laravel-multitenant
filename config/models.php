@@ -69,7 +69,7 @@ return [
 
         'use' => [
             // Reliese\Database\Eloquent\BitBooleans::class,
-            // Reliese\Database\Eloquent\BlamableBehavior::class,
+            Illuminate\Database\Eloquent\Factories\HasFactory::class
         ],
 
         /*
@@ -183,7 +183,7 @@ return [
         |
         */
 
-        'snake_attributes' => true,
+        'snake_attributes' => false,
 
         /*
         |--------------------------------------------------------------------------
