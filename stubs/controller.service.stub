@@ -1,0 +1,229 @@
+<?php
+
+
+namespace {{ namespace }};
+
+
+use {{ rootNamespace }}Http\Controllers\Controller;
+
+use {{ rootNamespace }}Services\{{ model }}Service;
+
+use {{ rootNamespace }}Http\Resources\{{ path }}{{ model }}Resource;
+use {{ rootNamespace }}Http\Requests\{{ path }}Store{{ model }}Request;
+use {{ rootNamespace }}Http\Requests\{{ path }}Update{{ model }}Request;
+
+use Illuminate\Http\Request;
+
+class {{ class }} extends Controller
+{
+    
+    public {{ model }}Service ${{ modelVariable }};
+
+    public function __construct({{ model }}Service ${{ modelVariable }})
+    {
+        $this->{{ modelVariable }} = ${{ modelVariable }};
+    }
+
+     /**
+     *
+     *  @OA\Get(
+     *   security={ {"Platform-Code": ""}, {"Device-Id": ""}, {"Authorization" : ""}, {"Tag-Id" : ""} },
+     *   tags={"{{ wayVariable }}{{ controllerVariable }}"},
+     *   path="/api/{{ projectVariable }}{{ routeName }}",
+     *   summary="Получить список",
+     *   @OA\Response(
+     *     response=200,
+     *     description="",
+     *     @OA\JsonContent(
+     *         @OA\Property(property="data", type="array",  @OA\Items(ref="#/components/schemas/{{ way }}{{ model }}Resource")),
+     *         @OA\Property(
+     *             property="meta", 
+     *             type="object",   
+     *               @OA\Property(property="per_page", type="int", example="15"),
+     *               @OA\Property(property="total", type="int", example="100"),
+     *               @OA\Property(property="last_page", type="int", example="7"),
+     *               @OA\Property(property="current_page", type="int", example="1")
+     *         ),
+     *     )
+     *  ),
+     *   @OA\Response(response=401, description="Не авторизован"),
+     *   @OA\Response(response=403, description="Контент не доступен"),
+     *   @OA\Response(response=404, description="Не найдено"),
+     *   @OA\Response(response=429, description="Бан запросов на 1 минуту"),
+     *   @OA\Response(response=500, description="Ошибка сервера")
+     * )
+     */
+    public function index(Request $request)
+    {
+        return {{ model }}Resource::collection(
+            $this->{{ modelVariable }}->getList($request->all())
+            //$this->{{ modelVariable }}->getPaginateList($request->all())
+        );
+    }
+
+     /**
+     *
+     *  @OA\Post(
+     *   security={ {"Platform-Code": ""}, {"Device-Id": ""}, {"Authorization" : ""}, {"Tag-Id" : ""} },
+     *   tags={"{{ wayVariable }}{{ controllerVariable }}"},
+     *   path="/api/{{ projectVariable }}{{ routeName }}",
+     *   summary="Создание",
+     *   @OA\RequestBody(
+     *      required=true,
+     *      description="Заполните форму",
+     *      @OA\JsonContent(
+     *            example={
+     *               "example_field" : "example_datum"
+     *            }
+     *          ),
+     *   ),
+     *   @OA\Response(
+     *     response=201,
+     *     description="Получение карточки",
+     *     @OA\JsonContent(
+     *         @OA\Property(property="data", type="object", ref="#/components/schemas/{{ way }}{{ model }}Resource"),
+     *     )
+     *   ),
+     *   @OA\Response(response=401, description="Не авторизован"),
+     *   @OA\Response(response=403, description="Контент не доступен"),
+     *   @OA\Response(response=404, description="Не найдено"),
+     *   @OA\Response(response=422, description="Валидация формы"),
+     *   @OA\Response(response=429, description="Бан запросов на 1 минуту"),
+     *   @OA\Response(response=500, description="Ошибка сервера")
+     * )
+     */
+    public function store(Store{{ model }}Request $request)
+    {
+        return new {{ model }}Resource(
+            $this->{{ modelVariable }}->store($request->all())
+        );
+    }
+
+
+    /**
+     *
+     *  @OA\Get(
+     *   security={ {"Platform-Code": ""}, {"Device-Id": ""}, {"Authorization" : ""}, {"Tag-Id" : ""} },
+     *   tags={"{{ wayVariable }}{{ controllerVariable }}"},
+     *   path="/api/{{ projectVariable }}{{ routeName }}/{id}",
+     *   summary="Получить карточку",
+     *   @OA\Parameter(
+     *     name="id",
+     *     description="ссылка",
+     *     required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="string",
+     *          ),
+     *    ),
+     *   @OA\Response(
+     *     response=200,
+     *     description="Элемент",
+     *     @OA\JsonContent(
+     *         @OA\Property(property="data", type="object", ref="#/components/schemas/{{ way }}{{ model }}Resource"),
+     *     )
+     *  ),
+     *   @OA\Response(response=401, description="Не авторизован"),
+     *   @OA\Response(response=403, description="Контент не доступен"),
+     *   @OA\Response(response=404, description="Не найдено"),
+     *   @OA\Response(response=429, description="Бан запросов на 1 минуту"),
+     *   @OA\Response(response=500, description="Ошибка сервера")
+     * )
+     */
+    public function show($id)
+    {
+        return new {{ model }}Resource(
+             $this->{{ modelVariable }}->showById($id, [])
+        );
+    }
+
+   /**
+     *
+     *  @OA\Put(
+     *   security={ {"Platform-Code": ""}, {"Device-Id": ""}, {"Authorization" : ""}, {"Tag-Id" : ""} },
+     *   tags={"{{ wayVariable }}{{ controllerVariable }}"},
+     *   path="/api/{{ projectVariable }}{{ routeName }}/{id}",
+     *   summary="Обновление",
+     *   @OA\Parameter(
+     *     name="id",
+     *     description="ссылка",
+     *     required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="string",
+     *          ),
+     *    ),
+     *   @OA\RequestBody(
+     *      required=true,
+     *      description="Заполните форму",
+     *      @OA\JsonContent(
+     *            example={
+     *               "example_field" : "example_datum"
+     *            }
+     *          ),
+     *   ),
+     *   @OA\Response(
+     *     response=200,
+     *     description="Получение карточки",
+     *     @OA\JsonContent(
+     *         @OA\Property(property="data", type="object", ref="#/components/schemas/{{ way }}{{ model }}Resource"),
+     *     )
+     *   ),
+     *   @OA\Response(response=401, description="Не авторизован"),
+     *   @OA\Response(response=403, description="Контент не доступен"),
+     *   @OA\Response(response=404, description="Не найдено"),
+     *   @OA\Response(response=422, description="Валидация формы"),
+     *   @OA\Response(response=429, description="Бан запросов на 1 минуту"),
+     *   @OA\Response(response=500, description="Ошибка сервера")
+     * )
+     */
+    public function update(Update{{ model }}Request $request, $id)
+    {
+        return new {{ model }}Resource(
+          $this->{{ modelVariable }}->update($request->all(), $id)
+        );
+    }
+
+    /**
+     *
+     *  @OA\Delete(
+     *   security={ {"Platform-Code": ""}, {"Device-Id": ""}, {"Authorization" : ""}, {"Tag-Id" : ""} },
+     *   tags={"{{ wayVariable }}{{ controllerVariable }}"},
+     *   path="/api/{{ projectVariable }}{{ routeName }}/{id}",
+     *   summary="Обновление",
+     *   @OA\Parameter(
+     *     name="id",
+     *     description="ссылка",
+     *     required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="string",
+     *          ),
+     *    ),
+     *   @OA\Response(
+     *     response=200,
+     *     description="Получение карточки",
+     *     @OA\JsonContent(
+     *         @OA\Property(property="data", type="object", example=""),
+     *     )
+     *   ),
+     *   @OA\Response(response=401, description="Не авторизован"),
+     *   @OA\Response(response=403, description="Контент не доступен"),
+     *   @OA\Response(response=404, description="Не найдено"),
+     *   @OA\Response(response=422, description="Валидация формы"),
+     *   @OA\Response(response=429, description="Бан запросов на 1 минуту"),
+     *   @OA\Response(response=500, description="Ошибка сервера")
+     * )
+     */
+    public function destroy($id)
+    {
+       return response()->json(
+            [
+                'data' => [
+                    'message' => __('Объект удален'),
+                    'success' => (bool) $this->{{ modelVariable }}->destroy($id)
+                ]
+            ]
+       );
+    }
+}

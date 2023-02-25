@@ -1,0 +1,18 @@
+<?php
+
+namespace {{ namespace }};
+
+/**
+ * Class DummyClass.
+ */
+class DummyClass
+{
+
+    public function __construct() {
+       
+    }
+
+    //business logic
+
+
+}

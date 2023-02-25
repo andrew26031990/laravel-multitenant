@@ -1,0 +1,42 @@
+<?php
+
+namespace {{ namespace }};
+{{ namespacedRepository }}
+
+/**
+ * Class DummyClass.
+ */
+class DummyClass
+{
+
+    public {{ Repository }} ${{ RepositoryVariable }};
+
+    public function __construct({{ Repository }} ${{ RepositoryVariable }}) {
+        $this->{{ RepositoryVariable }} = ${{ RepositoryVariable }};
+    }
+
+    public function getList($request = null, $with = []){
+        return $this->{{ RepositoryVariable }}->getList($request, $with);
+    }
+
+    public function getPaginateList($request = null, $with = []){
+        return $this->{{ RepositoryVariable }}->getPaginateList($request, $with);
+    }
+
+    public function showById($id = null, $with = []){
+        return $this->{{ RepositoryVariable }}->showById($id, $with);
+    }
+
+    public function store($attributes, $load = []){
+        return $this->{{ RepositoryVariable }}->store($attributes, $load);
+    }
+
+    public function update($attributes, $id, $load = [], $associate = []){
+        return $this->{{ RepositoryVariable }}->update($id, $attributes, $load, $associate);
+    }
+
+    public function destroy($id){
+        return $this->{{ RepositoryVariable }}->destroy($id);
+    }
+
+}

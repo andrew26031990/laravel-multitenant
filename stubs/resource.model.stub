@@ -1,0 +1,26 @@
+<?php
+
+namespace {{ namespace }};
+
+use Illuminate\Http\Resources\Json\JsonResource;
+
+ /**
+ *
+ * Class DummyClass.
+ * @OA\Schema (schema="{{ project }}")
+ * @mixin \App\Models\{{ Model }}
+ *
+ */
+
+class {{ class }} extends JsonResource
+{
+  
+    {{ swaggerParams }}
+
+    public function toArray($request)
+    {
+        return [
+            {{ params }}
+            ];
+    }
+}
