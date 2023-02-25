@@ -26,6 +26,9 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @package App\Models
  */
+
+
+ 
 class User extends Model
 {
 	protected $table = 'users';
