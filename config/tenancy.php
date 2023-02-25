@@ -22,6 +22,12 @@ return [
         'localhost',
     ],
 
+    'drivers' => [
+        'auto' => [
+            'tenant_creator' => App\TenantCreator::class,
+        ],
+    ],
+
     /**
      * Tenancy bootstrappers are executed when tenancy is initialized.
      * Their responsibility is making Laravel features tenant-aware.
@@ -52,8 +58,8 @@ return [
          * Tenant database names are created like this:
          * prefix + tenant_id + suffix.
          */
-        'prefix' => 'communal',
-        'suffix' => 'db',
+        'prefix' => 'tenant_',
+        'suffix' => '_db',
 
         /**
          * TenantDatabaseManagers are classes that handle the creation & deletion of tenant databases.
