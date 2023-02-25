@@ -2,138 +2,43 @@
 
 namespace App\Models;
 
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Passport\HasApiTokens;
 
-use Illuminate\Database\Eloquent\Model;
-
-use App\Traits\ColumnFillable;
-
-//use Illuminate\Database\Eloquent\SoftDeletes;
-
-//use Spatie\MediaLibrary\HasMedia;
-//use Spatie\MediaLibrary\InteractsWithMedia;
-//use Spatie\MediaLibrary\MediaCollections\Models\Media;
-
-//use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
-//use Astrotomic\Translatable\Translatable;
-
-/**
- * App\Models\User
- * @OA\Schema (schema="_User")
- */ 
-
-class User extends Model 
-    //implements
-    //HasMedia
-    //TranslatableContract
+class User extends Authenticatable
 {
-    use
-        HasFactory, 
-        //InteractsWithMedia,
-        //Translatable,
-        //SoftDeletes,
-        ColumnFillable;
+    use HasApiTokens, HasFactory, Notifiable;
 
-    
     /**
-    
-    *  @OA\Property(
-    *    property="id",
-    *    type="integer",
-    *    example="",
-    *    description=""
-    *  ) 
-    
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
+    ];
 
-    
-    *  @OA\Property(
-    *    property="name",
-    *    type="string",
-    *    example="",
-    *    description="Имя"
-    *  ) 
-    
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
 
-    
-    *  @OA\Property(
-    *    property="email",
-    *    type="string",
-    *    example="",
-    *    description=""
-    *  ) 
-    
-
-    
-    *  @OA\Property(
-    *    property="email_verified_at",
-    *    type="string",
-    *    example="",
-    *    description=""
-    *  ) 
-    
-
-    
-    *  @OA\Property(
-    *    property="password",
-    *    type="string",
-    *    example="",
-    *    description=""
-    *  ) 
-    
-
-    
-    *  @OA\Property(
-    *    property="remember_token",
-    *    type="string",
-    *    example="",
-    *    description=""
-    *  ) 
-    
-
-    
-    *  @OA\Property(
-    *    property="created_at",
-    *    type="string",
-    *    example="",
-    *    description=""
-    *  ) 
-    
-
-    
-    *  @OA\Property(
-    *    property="updated_at",
-    *    type="string",
-    *    example="",
-    *    description=""
-    *  ) 
-    
-
-    */    
-
-    public $timestamps = true;
-
-    protected $casts = [];
-
-    protected $appends = [];
-
-    protected $hidden = [];
-
-    //public $translatedAttributes = [
-    //    'title'
-    //];
-
-    //public function registerMediaConversions(
-    //    Media $media = null
-    //): void {
-    //    $this->addMediaConversion('medium')
-    //        ->width(400)
-    //       ->nonQueued();
-    //}
-
-    //public function registerMediaCollections(Media $media = null): void
-    //{
-    //    $this->addMediaCollection('preview')
-    //        ->singleFile();
-    //}
-
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
 }
