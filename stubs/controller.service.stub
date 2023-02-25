@@ -27,7 +27,7 @@ class {{ class }} extends Controller
      /**
      *
      *  @OA\Get(
-     *   security={ {"Platform-Code": ""}, {"Device-Id": ""}, {"Authorization" : ""}, {"Tag-Id" : ""} },
+     *   security={ {"Platform-Code": ""}, {"Device-Id": ""}, {"Authorization" : ""} },
      *   tags={"{{ wayVariable }}{{ controllerVariable }}"},
      *   path="/api/{{ projectVariable }}{{ routeName }}",
      *   summary="Получить список",
@@ -57,14 +57,13 @@ class {{ class }} extends Controller
     {
         return {{ model }}Resource::collection(
             $this->{{ modelVariable }}->getList($request->all())
-            //$this->{{ modelVariable }}->getPaginateList($request->all())
         );
     }
 
      /**
      *
      *  @OA\Post(
-     *   security={ {"Platform-Code": ""}, {"Device-Id": ""}, {"Authorization" : ""}, {"Tag-Id" : ""} },
+     *   security={ {"Platform-Code": ""}, {"Device-Id": ""}, {"Authorization" : ""} },
      *   tags={"{{ wayVariable }}{{ controllerVariable }}"},
      *   path="/api/{{ projectVariable }}{{ routeName }}",
      *   summary="Создание",
@@ -103,7 +102,7 @@ class {{ class }} extends Controller
     /**
      *
      *  @OA\Get(
-     *   security={ {"Platform-Code": ""}, {"Device-Id": ""}, {"Authorization" : ""}, {"Tag-Id" : ""} },
+     *   security={ {"Platform-Code": ""}, {"Device-Id": ""}, {"Authorization" : ""} },
      *   tags={"{{ wayVariable }}{{ controllerVariable }}"},
      *   path="/api/{{ projectVariable }}{{ routeName }}/{id}",
      *   summary="Получить карточку",
@@ -140,7 +139,7 @@ class {{ class }} extends Controller
    /**
      *
      *  @OA\Put(
-     *   security={ {"Platform-Code": ""}, {"Device-Id": ""}, {"Authorization" : ""}, {"Tag-Id" : ""} },
+     *   security={ {"Platform-Code": ""}, {"Device-Id": ""}, {"Authorization" : ""} },
      *   tags={"{{ wayVariable }}{{ controllerVariable }}"},
      *   path="/api/{{ projectVariable }}{{ routeName }}/{id}",
      *   summary="Обновление",
@@ -187,7 +186,7 @@ class {{ class }} extends Controller
     /**
      *
      *  @OA\Delete(
-     *   security={ {"Platform-Code": ""}, {"Device-Id": ""}, {"Authorization" : ""}, {"Tag-Id" : ""} },
+     *   security={ {"Platform-Code": ""}, {"Device-Id": ""}, {"Authorization" : ""} },
      *   tags={"{{ wayVariable }}{{ controllerVariable }}"},
      *   path="/api/{{ projectVariable }}{{ routeName }}/{id}",
      *   summary="Обновление",

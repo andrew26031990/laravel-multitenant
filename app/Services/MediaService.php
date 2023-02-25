@@ -19,10 +19,6 @@ class MediaService
         return $this->media->getList($request, $with);
     }
 
-    public function getPaginateList($request = null, $with = []){
-        return $this->media->getPaginateList($request, $with);
-    }
-
     public function showById($id = null, $with = []){
         return $this->media->showById($id, $with);
     }

@@ -19,10 +19,6 @@ class DummyClass
         return $this->{{ RepositoryVariable }}->getList($request, $with);
     }
 
-    public function getPaginateList($request = null, $with = []){
-        return $this->{{ RepositoryVariable }}->getPaginateList($request, $with);
-    }
-
     public function showById($id = null, $with = []){
         return $this->{{ RepositoryVariable }}->showById($id, $with);
     }

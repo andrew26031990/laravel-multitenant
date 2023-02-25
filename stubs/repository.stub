@@ -23,31 +23,20 @@ class DummyClass implements DummyClassInterface
     }
 
     public function getList($request = null, $with = []){
+        
         return $this
             ->model
             //->when(true, function($query){
             //    $query;
             //})
-            //->with($with)
+            ->with($with)
             ->orderByDesc('id')
             ->get();
     }
 
-    public function getPaginateList($request = null, $with = []){
-
-        return $this
-            ->model
-            //->when(true, function($query){
-            //    $query;
-            //})
-            //->with($with)
-            ->orderByDesc('id')
-            ->paginate( (int) (($per_page = optional($request)['per_page']) ? $per_page : 15) );
-
-    }
 
     public function showById($id = null, $with = []){
-
+       
         return $this
             ->model
             ->with($with)
@@ -62,18 +51,12 @@ class DummyClass implements DummyClassInterface
             ->create($attributes);
     }
 
-    public function update($attributes, $id, $load = [], $associate = []){
+    public function update($attributes, $id, $load = []){
         
         $data = $this
             ->model
             ->findOrFail($id);
-
         $data->fill($attributes);
-
-        foreach($associate as $objectName => $object){
-            $data->$objectName()->associate($object);
-        }
-
         $data->save();
 
         return $data;
