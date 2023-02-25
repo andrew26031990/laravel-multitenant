@@ -15,7 +15,6 @@ class {{ class }} extends Model
 {
     use HasFactory, ColumnFillable;
 
-
     {{ swaggerParams }}   
 
     protected $primaryKey = [

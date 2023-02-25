@@ -44,6 +44,10 @@ class ModelMakeCustomCommand extends ModelMakeCommand
         if ($this->option('translation')) {
             return 'stubs/model.translation.stub';
         }
+        
+        if ($this->option('table')) {
+            return 'stubs/model.swagger.stub';
+        }
 
         return 'stubs/model.stub';
     }

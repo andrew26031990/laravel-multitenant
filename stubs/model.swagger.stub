@@ -29,4 +29,28 @@ class {{ class }} extends Model
         //SoftDeletes,
         ColumnFillable;
 
+    {{ swaggerParams }}    
+    public $timestamps = true;
+    protected $casts = [];
+    protected $appends = [];
+    protected $hidden = [];
+
+    //public $translatedAttributes = [
+    //    'title'
+    //];
+
+    //public function registerMediaConversions(
+    //    Media $media = null
+    //): void {
+    //    $this->addMediaConversion('medium')
+    //        ->width(400)
+    //       ->nonQueued();
+    //}
+
+    //public function registerMediaCollections(Media $media = null): void
+    //{
+    //    $this->addMediaCollection('preview')
+    //        ->singleFile();
+    //}
+
 }
