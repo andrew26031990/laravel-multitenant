@@ -8,14 +8,11 @@ use App\Traits\ColumnFillable;
 
 /**
  * App\Models\{{ class }}
- * @OA\Schema (schema="_{{ class }}")
  */ 
 
 class {{ class }} extends Model 
 {
     use HasFactory, ColumnFillable;
-
-    {{ swaggerParams }}   
 
     protected $primaryKey = [
         //'second_key',
