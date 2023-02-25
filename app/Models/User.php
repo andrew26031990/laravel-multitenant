@@ -1,57 +1,139 @@
 <?php
 
-/**
- * Created by Reliese Model.
- */
-
 namespace App\Models;
 
-use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 use Illuminate\Database\Eloquent\Model;
 
+use App\Traits\ColumnFillable;
+
+//use Illuminate\Database\Eloquent\SoftDeletes;
+
+//use Spatie\MediaLibrary\HasMedia;
+//use Spatie\MediaLibrary\InteractsWithMedia;
+//use Spatie\MediaLibrary\MediaCollections\Models\Media;
+
+//use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
+//use Astrotomic\Translatable\Translatable;
+
 /**
- * Class User
- * 
- * @property int $id
- * @property string $name
- * @property string $email
- * @property Carbon|null $email_verified_at
- * @property string $password
- * @property string|null $remember_token
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
- * 
- * @property Collection|Test[] $tests
- *
- * @package App\Models
- */
+ * App\Models\User
+ * @OA\Schema (schema="_User")
+ */ 
 
-
- 
-class User extends Model
+class User extends Model 
+    //implements
+    //HasMedia
+    //TranslatableContract
 {
-	protected $table = 'users';
+    use
+        HasFactory, 
+        //InteractsWithMedia,
+        //Translatable,
+        //SoftDeletes,
+        ColumnFillable;
 
-	protected $dates = [
-		'email_verified_at'
-	];
+    
+    /**
+    
+    *  @OA\Property(
+    *    property="id",
+    *    type="integer",
+    *    example="",
+    *    description=""
+    *  ) 
+    
 
-	protected $hidden = [
-		'password',
-		'remember_token'
-	];
+    
+    *  @OA\Property(
+    *    property="name",
+    *    type="string",
+    *    example="",
+    *    description="Имя"
+    *  ) 
+    
 
-	protected $fillable = [
-		'name',
-		'email',
-		'email_verified_at',
-		'password',
-		'remember_token'
-	];
+    
+    *  @OA\Property(
+    *    property="email",
+    *    type="string",
+    *    example="",
+    *    description=""
+    *  ) 
+    
 
-	public function tests()
-	{
-		return $this->hasMany(Test::class);
-	}
+    
+    *  @OA\Property(
+    *    property="email_verified_at",
+    *    type="string",
+    *    example="",
+    *    description=""
+    *  ) 
+    
+
+    
+    *  @OA\Property(
+    *    property="password",
+    *    type="string",
+    *    example="",
+    *    description=""
+    *  ) 
+    
+
+    
+    *  @OA\Property(
+    *    property="remember_token",
+    *    type="string",
+    *    example="",
+    *    description=""
+    *  ) 
+    
+
+    
+    *  @OA\Property(
+    *    property="created_at",
+    *    type="string",
+    *    example="",
+    *    description=""
+    *  ) 
+    
+
+    
+    *  @OA\Property(
+    *    property="updated_at",
+    *    type="string",
+    *    example="",
+    *    description=""
+    *  ) 
+    
+
+    */    
+
+    public $timestamps = true;
+
+    protected $casts = [];
+
+    protected $appends = [];
+
+    protected $hidden = [];
+
+    //public $translatedAttributes = [
+    //    'title'
+    //];
+
+    //public function registerMediaConversions(
+    //    Media $media = null
+    //): void {
+    //    $this->addMediaConversion('medium')
+    //        ->width(400)
+    //       ->nonQueued();
+    //}
+
+    //public function registerMediaCollections(Media $media = null): void
+    //{
+    //    $this->addMediaCollection('preview')
+    //        ->singleFile();
+    //}
+
 }
