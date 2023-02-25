@@ -42,6 +42,7 @@ class ProjectService
         'oauth_refresh_tokens',
         'failed_jobs',
         'migrations',
+        'media',
         'personal_access_tokens'
     ];
 
@@ -245,7 +246,7 @@ class ProjectService
         $relations = $schema->listTableForeignKeys($table, $database);
 
         foreach ($relations as $relation) {
-            dd($relation);
+            // dd($relation);
         }
 
         if (!$columns) {
