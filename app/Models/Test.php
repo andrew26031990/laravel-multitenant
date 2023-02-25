@@ -1,112 +1,56 @@
 <?php
 
+/**
+ * Created by Reliese Model.
+ */
+
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
-
-use App\Traits\ColumnFillable;
-
-//use Illuminate\Database\Eloquent\SoftDeletes;
-
-//use Spatie\MediaLibrary\HasMedia;
-//use Spatie\MediaLibrary\InteractsWithMedia;
-//use Spatie\MediaLibrary\MediaCollections\Models\Media;
-
-//use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
-//use Astrotomic\Translatable\Translatable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * App\Models\Test
- * @OA\Schema (schema="_Test")
- */ 
-
-class Test extends Model 
-    //implements
-    //HasMedia
-    //TranslatableContract
+ * Class Test
+ * 
+ * @property int $id
+ * @property int $user_id
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property string|null $deleted_at
+ * 
+ * @property User $user
+ * @property Collection|TestLog[] $test_logs
+ * @property Collection|TestTranslation[] $test_translations
+ *
+ * @package App\Models
+ */
+class Test extends Model
 {
-    use
-        HasFactory, 
-        //InteractsWithMedia,
-        //Translatable,
-        //SoftDeletes,
-        ColumnFillable;
+	use SoftDeletes;
+	protected $table = 'tests';
 
-    
-    /**
-    
-    *  @OA\Property(
-    *    property="id",
-    *    type="integer",
-    *    example="",
-    *    description="ID сущности"
-    *  ) 
-    
+	protected $casts = [
+		'user_id' => 'int'
+	];
 
-    
-    *  @OA\Property(
-    *    property="user_id",
-    *    type="integer",
-    *    example="",
-    *    description=""
-    *  ) 
-    
+	protected $fillable = [
+		'user_id'
+	];
 
-    
-    *  @OA\Property(
-    *    property="created_at",
-    *    type="string",
-    *    example="",
-    *    description=""
-    *  ) 
-    
+	public function user()
+	{
+		return $this->belongsTo(User::class);
+	}
 
-    
-    *  @OA\Property(
-    *    property="updated_at",
-    *    type="string",
-    *    example="",
-    *    description=""
-    *  ) 
-    
+	public function test_logs()
+	{
+		return $this->hasMany(TestLog::class);
+	}
 
-    
-    *  @OA\Property(
-    *    property="deleted_at",
-    *    type="string",
-    *    example="",
-    *    description=""
-    *  ) 
-    
-
-    */    
-
-    public $timestamps = true;
-
-    protected $casts = [];
-
-    protected $appends = [];
-
-    protected $hidden = [];
-
-    //public $translatedAttributes = [
-    //    'title'
-    //];
-
-    //public function registerMediaConversions(
-    //    Media $media = null
-    //): void {
-    //    $this->addMediaConversion('medium')
-    //        ->width(400)
-    //       ->nonQueued();
-    //}
-
-    //public function registerMediaCollections(Media $media = null): void
-    //{
-    //    $this->addMediaCollection('preview')
-    //        ->singleFile();
-    //}
-
+	public function test_translations()
+	{
+		return $this->hasMany(TestTranslation::class);
+	}
 }

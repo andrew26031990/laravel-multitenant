@@ -1,58 +1,40 @@
 <?php
 
+/**
+ * Created by Reliese Model.
+ */
+
 namespace App\Models;
 
-use App\Traits\ColumnFillable;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Models\TestTranslation
- * @OA\Schema (schema="_TestTranslation")
- */ 
-
-class TestTranslation extends Model 
+ * Class TestTranslation
+ * 
+ * @property int $test_id
+ * @property string $locale
+ * @property string|null $title
+ * 
+ * @property Test $test
+ *
+ * @package App\Models
+ */
+class TestTranslation extends Model
 {
-    use HasFactory, ColumnFillable;
+	protected $table = 'test_translations';
+	public $incrementing = false;
+	public $timestamps = false;
 
-    
-    /**
-    
-    *  @OA\Property(
-    *    property="test_id",
-    *    type="integer",
-    *    example="",
-    *    description=""
-    *  ) 
-    
+	protected $casts = [
+		'test_id' => 'int'
+	];
 
-    
-    *  @OA\Property(
-    *    property="locale",
-    *    type="string",
-    *    example="",
-    *    description="Язык"
-    *  ) 
-    
+	protected $fillable = [
+		'title'
+	];
 
-    
-    *  @OA\Property(
-    *    property="title",
-    *    type="string",
-    *    example="",
-    *    description="Название"
-    *  ) 
-    
-
-    */   
-
-    protected $primaryKey = [
-        //'second_key',
-        'locale'
-    ];
-
-    public $timestamps = false;
-
-    public $incrementing = false;
-
+	public function test()
+	{
+		return $this->belongsTo(Test::class);
+	}
 }
