@@ -281,6 +281,8 @@ return [
 
         'except' => [
             'migrations',
+            'domains',
+            'tenants',
             'users',
             '*_translations',
             '*_tokens',
