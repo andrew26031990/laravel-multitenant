@@ -1,5 +1,5 @@
 #INIT
-
+php artisan sail:instal
 
 #COMMANDS
 
