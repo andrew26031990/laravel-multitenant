@@ -63,24 +63,19 @@ return [
             ]) : [],
         ],
 
-        'mysql_tenant' => [
-            'driver' => 'mysql',
+        'pgsql_tenant' => [
+            'driver' => 'pgsql',
             'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST_TENANT', '127.0.0.1'),
-            'port' => env('DB_PORT_TENANT', '3306'),
-            'database' => env('DB_DATABASE_TENANT', 'tenant_7b738192-4b3a-422b-9006-2f7b300a0d1c_db'),
-            'username' => env('DB_USERNAME_TENANT', 'forge'),
-            'password' => env('DB_PASSWORD_TENANT', ''),
-            'unix_socket' => env('DB_SOCKET', ''),
-            'charset' => 'utf8mb4',
-            'collation' => 'utf8mb4_unicode_ci',
+            'host' => env('DB_HOST', '127.0.0.1'),
+            'port' => env('DB_PORT', '5432'),
+            'database' => env('DB_DATABASE', 'forge'),
+            'username' => env('DB_USERNAME', 'forge'),
+            'password' => env('DB_PASSWORD', ''),
+            'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
-            'strict' => true,
-            'engine' => null,
-            'options' => extension_loaded('pdo_mysql') ? array_filter([
-                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
-            ]) : [],
+            'search_path' => 'public',
+            'sslmode' => 'prefer',
         ],
 
         'pgsql' => [

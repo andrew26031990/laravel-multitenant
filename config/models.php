@@ -13,11 +13,6 @@ return [
     */
 
 
-    // 'connections' => [
-    //     'mysql', 'mysql_tenant'
-    // ],
-
-
     '*' => [
 
 
