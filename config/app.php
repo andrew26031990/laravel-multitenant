@@ -197,7 +197,8 @@ return [
         App\Providers\TelescopeServiceProvider::class,
         // Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         App\Providers\TenancyServiceProvider::class,
-        Laravel\Telescope\TelescopeServiceProvider::class
+        Laravel\Telescope\TelescopeServiceProvider::class,
+        \KitLoong\MigrationsGenerator\MigrationsGeneratorServiceProvider::class
 
     ],
 
