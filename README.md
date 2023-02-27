@@ -5,16 +5,13 @@ alias sail='[ -f sail ] && sh sail || sh vendor/bin/sail'
 
 #COMMANDS
 
-./vendor/bin/sail up
+sail up
 
-./vendor/bin/sail artisan make:migration create__table --create= --path=database/migrations/tenant
+sail artisan make:migration create_tests_table --create=tests --path=database/migrations/tenant
 
-./vendor/bin/sail artisan tenants:migrate 
+sail artisan tenants:migrate 
 
-./vendor/bin/sail artisan code:models
+sail artisan code:models
 
-./vendor/bin/sail artisan model:generate
-
-./vendor/bin/sail artisan code:models --connection=pgsql_tenant
-
+sail artisan code:models --connection=pgsql_tenant
 
