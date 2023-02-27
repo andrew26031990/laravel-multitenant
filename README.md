@@ -14,4 +14,3 @@ sail artisan tenants:migrate
 sail artisan code:models
 
 sail artisan code:models --connection=pgsql_tenant
-
