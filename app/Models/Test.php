@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -26,7 +27,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * 
  * @property User $user
  * @property Collection|TestLog[] $testLogs
- * @property Collection|TestTranslation[] $testTranslations
+ * @property TestTranslation $testTranslation
  *
  * @package App\Models
  */
@@ -55,8 +56,8 @@ class Test extends Model
 		return $this->hasMany(TestLog::class);
 	}
 
-	public function testTranslations(): HasMany
+	public function testTranslation(): HasOne
 	{
-		return $this->hasMany(TestTranslation::class);
+		return $this->hasOne(TestTranslation::class);
 	}
 }

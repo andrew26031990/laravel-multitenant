@@ -1,5 +1,7 @@
 #INIT
-php artisan sail:instal
+php artisan sail:install
+
+alias sail='[ -f sail ] && sh sail || sh vendor/bin/sail'
 
 #COMMANDS
 
