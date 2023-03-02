@@ -29,9 +29,9 @@ Route::middleware([
     });
 
     Route::get('/update', function (){
-        $user = App\Models\User::create([
-            'name' => 'John Foo222', // synced
-            'email' => 'john@foreignhost222', // synced
+        $user = App\Models\CentralUser::whereGlobalId('5fb9afcb-21d6-3f3d-a190-b30e73952930')->update([
+            'name' => 'John Foo222333', // synced
+            'email' => 'john@foreignhost222333', // synced
         ]);
         return 'This is your multi-tenant application. The id of the current tenant is ' . tenant('id');
     });
