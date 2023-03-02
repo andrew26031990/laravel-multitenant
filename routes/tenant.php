@@ -19,9 +19,12 @@ use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
 */
 
 Route::middleware([
-    'api',
+    'web',
     InitializeTenancyByDomain::class,
     PreventAccessFromCentralDomains::class,
 ])->group(function () {
-    Route::get('user', [App\Http\Controllers\TestController::class, 'user'])->middleware('auth:api');
+    Route::get('/', function () {
+        dd(\App\Models\User::all());
+        return 'This is your multi-tenant application. The id of the current tenant is ' . tenant('id');
+    });
 });
