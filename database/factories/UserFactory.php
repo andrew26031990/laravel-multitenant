@@ -18,9 +18,10 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'first_name' => fake()->name(),
-            'last_name' => fake()->name(),
-            'phone' => '99890' . rand(1234567, 7654321),
+            'global_id' => fake()->uuid(),
+            'name' => fake()->name(),
+            //'phone' => '99890' . rand(1234567, 7654321),
+            'email' => fake()->email,
             'email_verified_at' => now(),
             'password' => bcrypt('123123'), // password
             'remember_token' => Str::random(10),
