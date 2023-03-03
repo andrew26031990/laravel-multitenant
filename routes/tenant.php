@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Models\User;
+use App\Models\Tenant\User;
 use Illuminate\Support\Facades\Route;
 use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
 use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
@@ -19,7 +19,7 @@ use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
 |
 */
 
-Route::post('auth', function (){
+/*Route::post('auth', function (){
     dd(User::whereGlobalId('5fb9afcb-21d6-3f3d-a190-b30e73952930')->first()->createToken('token')->accessToken);
 });
 
@@ -29,7 +29,7 @@ Route::get('/without-auth', function (){
 
 Route::get('/with-auth', function (){
     return 'here-with-auth';
-})->middleware('auth:api');
+})->middleware('auth:api');*/
 
 Route::middleware([
     'web',
@@ -40,11 +40,11 @@ Route::middleware([
         return 'This is your multi-tenant application. The id of the current tenant is ' . tenant('id');
     })->middleware('auth:api');
 
-    Route::get('/update', function (){
-        $user = App\Models\CentralUser::whereGlobalId('5fb9afcb-21d6-3f3d-a190-b30e73952930')->update([
+    /*Route::get('/update', function (){
+        $user = App\Models\Employee::whereGlobalId('5fb9afcb-21d6-3f3d-a190-b30e73952930')->update([
             'name' => 'John Foo222333', // synced
             'email' => 'john@foreignhost222333', // synced
         ]);
         return 'This is your multi-tenant application. The id of the current tenant is ' . tenant('id');
-    });
+    });*/
 });

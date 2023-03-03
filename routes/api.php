@@ -1,12 +1,42 @@
 <?php
 
 
-use App\Models\CentralUser;
-use App\Models\User;
+use App\Models\Tenant\User;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('test', [App\Http\Controllers\TestController::class, 'index']);
+Route::group(
+    [
+        'prefix' => 'v1',
+    ],
+    function () {
+        Route::group(
+            [
+                'prefix' => 'profile'
+            ],
+            function () {
+                Route::group(
+                    [
+                        'prefix' => 'auth'
+                    ],
+                    function (){
+                        Route::post('code', [\App\Http\Controllers\v1\Profile\AuthController::class, 'getCode']);
+                        Route::post('verify', [\App\Http\Controllers\v1\Profile\AuthController::class, 'verifyCode']);
+                });
+        });
+    }
+);
+
+
+
+
+
+
+
+
+
+
+/*Route::get('test', [App\Http\Controllers\TestController::class, 'index']);
 Route::get('token', [App\Http\Controllers\TestController::class, 'token']);
 Route::get('user', [App\Http\Controllers\TestController::class, 'user'])->middleware('auth:api');
 
@@ -18,9 +48,9 @@ Route::namespace('company')->group(function () {
 });
 
 Route::namespace('client')->group(function () {
-});
+});*/
 
-Route::post('auth', function (){
+/*Route::post('auth', function (){
     dd(User::whereId(1)->first()->createToken('token')->accessToken);
 });
 
@@ -30,24 +60,24 @@ Route::get('/without-auth', function (){
 
 Route::get('/with-auth', function (){
     return 'here-with-auth';
-})->middleware('auth:api');
+})->middleware('auth:api');*/
 
-Route::get('/fill', function (){
+/*Route::get('/fill', function (){
     /*$tenant1 = App\Models\Tenant::create(['id' => 'foo']);
     $tenant1->domains()->create(['domain' => 'foo.localhost']);
 
     $tenant2 = App\Models\Tenant::create(['id' => 'bar']);
-    $tenant2->domains()->create(['domain' => 'bar.localhost']);*/
+    $tenant2->domains()->create(['domain' => 'bar.localhost']);
 
     //App\Models\Tenant::all()->runForEach(function () {
-        App\Models\User::factory()->create();
+        //\App\Models\Tenant\User::factory()->create();
     //});
-});
+});*/
 
-Route::get('/update', function (){
-    App\Models\User::whereGlobalId('5fb9afcb-21d6-3f3d-a190-b30e73952930')->update([
+/*Route::get('/update', function (){
+    \App\Models\Tenant\User::whereGlobalId('5fb9afcb-21d6-3f3d-a190-b30e73952930')->update([
         'name' => 'John Foo111', // synced
         'email' => 'john@foreignhost111', // synced
     ]);
-});
+});*/
 

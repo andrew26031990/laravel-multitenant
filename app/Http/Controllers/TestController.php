@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tenant;
-use App\Models\User;
+use App\Models\Tenant\User;
 use Illuminate\Http\Request;
 use Str;
 

@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Tenant\User;
 use App\Traits\ColumnFillable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
@@ -23,11 +23,11 @@ use Stancl\Tenancy\Database\Models\TenantPivot;
 //use Astrotomic\Translatable\Translatable;
 
 /**
- * App\Models\CentralUser
+ * App\Models\Employee
  * @OA\Schema (schema="_CentralUser")
  */
 
-class CentralUser extends Model implements SyncMaster
+class Employee extends Model implements SyncMaster
     //implements
     //HasMedia
     //TranslatableContract
@@ -43,6 +43,11 @@ class CentralUser extends Model implements SyncMaster
         ResourceSyncing, CentralConnection;
 
     protected $guarded = [];
+    protected $fillable = [
+        'phone',
+        'is_active',
+    ];
+
     public $timestamps = false;
     public $table = 'users';
 //    public $incrementing = false;
@@ -50,8 +55,13 @@ class CentralUser extends Model implements SyncMaster
 
     public function tenants(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(Tenant::class, 'tenant_users', 'global_user_id', 'tenant_id', 'global_id')
+        return $this->belongsToMany(Tenant::class, 'tenant_users', 'user_id', 'tenant_id', 'id')
             ->using(TenantPivot::class);
+    }
+
+    public function verificationCodes(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(VerificationCode::class, 'user_id', 'id');
     }
 
     public function getTenantModelName(): string
@@ -77,9 +87,7 @@ class CentralUser extends Model implements SyncMaster
     public function getSyncedAttributeNames(): array
     {
         return [
-            'name',
-            'password',
-            'email',
+            'is_active',
         ];
     }
 }

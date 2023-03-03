@@ -2,10 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\Test;
-use App\Models\TestLog;
-use App\Models\User;
-
 use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder

@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Tenant;
 
 
+use App\Models\Employee;
+use App\Models\Test;
+use App\Models\VerificationCode;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
@@ -28,9 +30,8 @@ class User extends Authenticatable implements Syncable
      * @var array
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'phone',
+        'is_active',
     ];
 
     /**
@@ -69,15 +70,13 @@ class User extends Authenticatable implements Syncable
 
     public function getCentralModelName(): string
     {
-        return CentralUser::class;
+        return Employee::class;
     }
 
     public function getSyncedAttributeNames(): array
     {
         return [
-            'name',
-            'password',
-            'email',
+            'is_active',
         ];
     }
 }

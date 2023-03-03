@@ -2,22 +2,23 @@
 
 namespace App\Repositories\Eloquent;
 
-use App\Models\Tenant\User;
-use App\Repositories\UserRepositoryInterface;
+use App\Models\Employee;
+use App\Repositories\EmployeeRepositoryInterface;
+use Illuminate\Support\Facades\DB;
 
 /**
  *
- * Class UserRepository.
+ * Class EmployeeRepository.
  *
- * @mixin \App\Models\Tenant\User
+ * @mixin \App\Models\Employee
  *
  */
-class UserRepository implements UserRepositoryInterface
+class EmployeeRepository implements EmployeeRepositoryInterface
 {
 
-    protected User $model;
+    protected Employee $model;
 
-    public function __construct(User $model)
+    public function __construct(Employee $model)
     {
         $this->model = $model;
     }
@@ -45,10 +46,9 @@ class UserRepository implements UserRepositoryInterface
 
 
     public function store($attributes, $load = []){
-
         return $this
             ->model
-            ->create($attributes);
+            ->firstOrCreate($attributes);
     }
 
     public function update($attributes, $id, $load = []){
@@ -70,4 +70,17 @@ class UserRepository implements UserRepositoryInterface
             ->delete();
     }
 
+    public function sendOtp($employee)
+    {
+        return $employee
+            ->verificationCodes()
+            ->create();
+    }
+
+    public function verifyOtp($request)
+    {
+        $employee = $this->model->wherePhone($request['phone'])->first();
+        $employee->access = $employee->createToken('token');
+        return $employee;
+    }
 }
