@@ -32,7 +32,7 @@ Route::get('/with-auth', function (){
 })->middleware('auth:api');*/
 
 Route::middleware([
-    'web',
+    'check', 'web',
     InitializeTenancyByDomain::class,
     PreventAccessFromCentralDomains::class,
 ])->group(function () {
