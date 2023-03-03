@@ -24,4 +24,11 @@ class Tenant extends BaseTenant implements TenantWithDatabase
         return $this->belongsToMany(CentralUser::class, 'tenant_users', 'tenant_id', 'global_user_id', 'global_id')
             ->using(TenantPivot::class);
     }
+
+    public static function getCustomColumns(): array
+    {
+        return [
+            'id',
+        ];
+    }
 }

@@ -20,16 +20,28 @@ Route::namespace('company')->group(function () {
 Route::namespace('client')->group(function () {
 });
 
+Route::post('auth', function (){
+    dd(User::whereId(1)->first()->createToken('token')->accessToken);
+});
+
+Route::get('/without-auth', function (){
+    return 'here';
+});
+
+Route::get('/with-auth', function (){
+    return 'here-with-auth';
+})->middleware('auth:api');
+
 Route::get('/fill', function (){
-    $tenant1 = App\Models\Tenant::create(['id' => 'foo']);
+    /*$tenant1 = App\Models\Tenant::create(['id' => 'foo']);
     $tenant1->domains()->create(['domain' => 'foo.localhost']);
 
     $tenant2 = App\Models\Tenant::create(['id' => 'bar']);
-    $tenant2->domains()->create(['domain' => 'bar.localhost']);
+    $tenant2->domains()->create(['domain' => 'bar.localhost']);*/
 
-    App\Models\Tenant::all()->runForEach(function () {
+    //App\Models\Tenant::all()->runForEach(function () {
         App\Models\User::factory()->create();
-    });
+    //});
 });
 
 Route::get('/update', function (){

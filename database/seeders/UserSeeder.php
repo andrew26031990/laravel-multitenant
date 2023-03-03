@@ -18,13 +18,13 @@ class UserSeeder extends Seeder
     public function run()
     {
 
-        User::factory()->count(3)
+        /*User::factory()->count(3)
             ->has(
                 Test::factory()
                     ->has(
                         TestLog::factory()->count(2)
                     )->count(2)
             )
-            ->create();
+            ->create();*/
     }
 }

@@ -11,7 +11,7 @@ use Laravel\Passport\HasApiTokens;
 use Stancl\Tenancy\Contracts\Syncable;
 use Stancl\Tenancy\Database\Concerns\ResourceSyncing;
 
-class User extends Model implements Syncable
+class User extends Authenticatable implements Syncable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -20,7 +20,7 @@ class User extends Model implements Syncable
     protected $guarded = [];
     public $timestamps = false;
 
-    public $incrementing = false;
+    //public $incrementing = false;
 
     /**
      * The attributes that are mass assignable.
@@ -64,7 +64,7 @@ class User extends Model implements Syncable
 
     public function getGlobalIdentifierKeyName(): string
     {
-        return 'global_id';
+        return 'id';
     }
 
     public function getCentralModelName(): string

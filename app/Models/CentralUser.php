@@ -45,7 +45,8 @@ class CentralUser extends Model implements SyncMaster
     protected $guarded = [];
     public $timestamps = false;
     public $table = 'users';
-    public $incrementing = false;
+//    public $incrementing = false;
+
 
     public function tenants(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
@@ -65,7 +66,7 @@ class CentralUser extends Model implements SyncMaster
 
     public function getGlobalIdentifierKeyName(): string
     {
-        return 'global_id';
+        return 'id';
     }
 
     public function getCentralModelName(): string

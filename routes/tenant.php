@@ -19,6 +19,18 @@ use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
 |
 */
 
+Route::post('auth', function (){
+    dd(User::whereGlobalId('5fb9afcb-21d6-3f3d-a190-b30e73952930')->first()->createToken('token')->accessToken);
+});
+
+Route::get('/without-auth', function (){
+    return 'here';
+});
+
+Route::get('/with-auth', function (){
+    return 'here-with-auth';
+})->middleware('auth:api');
+
 Route::middleware([
     'web',
     InitializeTenancyByDomain::class,
@@ -26,7 +38,7 @@ Route::middleware([
 ])->group(function () {
     Route::get('/', function () {
         return 'This is your multi-tenant application. The id of the current tenant is ' . tenant('id');
-    });
+    })->middleware('auth:api');
 
     Route::get('/update', function (){
         $user = App\Models\CentralUser::whereGlobalId('5fb9afcb-21d6-3f3d-a190-b30e73952930')->update([
