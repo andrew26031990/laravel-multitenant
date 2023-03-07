@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-interface EmployeeRepositoryInterface
+interface DomainRepositoryInterface
 {
     public function getList($request = null, $with = []);
 
@@ -13,10 +13,4 @@ interface EmployeeRepositoryInterface
     public function update($attributes, $id, $load = []);
 
     public function destroy($id);
-
-    public function sendOtp($employee);
-
-    public function verifyOtp($request);
-
-    public function logout();
 }

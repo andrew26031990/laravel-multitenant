@@ -33,6 +33,22 @@ class EmployeeResource extends JsonResource
      *  )
      *
      *  @OA\Property(
+     *    property="first_name",
+     *    type="string",
+     *    example="",
+     *    description="Имя"
+     *  )
+     *
+     *
+     *  @OA\Property(
+     *    property="last_name",
+     *    type="string",
+     *    example="",
+     *    description="Фамилия"
+     *  )
+     *
+     *
+     *  @OA\Property(
      *    property="is_active",
      *    type="boolean",
      *    example="",
@@ -53,6 +69,7 @@ class EmployeeResource extends JsonResource
      *    example="",
      *    description="Дата обновления сотрудника"
      *  )
+     *
      */
 
     public function toArray($request)
@@ -60,6 +77,8 @@ class EmployeeResource extends JsonResource
         return [
             'id' => $this->id,
             'phone' => $this->phone,
+            'first_name' => $this->first_name,
+            'last_name' => $this->last_name,
             'is_active' => $this->is_active,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,

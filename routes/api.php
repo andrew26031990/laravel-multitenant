@@ -23,7 +23,28 @@ Route::group(
                         Route::post('code', [\App\Http\Controllers\v1\Profile\AuthController::class, 'getCode']);
                         Route::post('verify', [\App\Http\Controllers\v1\Profile\AuthController::class, 'verifyCode']);
                 });
+                Route::group(
+                    [
+                    'middleware' => 'auth:api'
+                ],function (){
+                    Route::apiResource('employees', \App\Http\Controllers\v1\Profile\EmployeeController::class);
+                    Route::group(
+                        [
+                            'prefix' => 'employee'
+                        ],
+                        function (){
+                            Route::post('logout', [\App\Http\Controllers\v1\Profile\EmployeeController::class, 'logout']);
+                        });
+                });
         });
+        Route::group(
+            [
+                'prefix' => 'company',
+                'middleware' => 'auth:api'
+            ],
+            function () {
+                Route::apiResource('tenants', \App\Http\Controllers\v1\Company\TenantController::class)->only('index', 'store');
+            });
     }
 );
 
@@ -80,4 +101,14 @@ Route::get('/with-auth', function (){
         'email' => 'john@foreignhost111', // synced
     ]);
 });*/
+
+Route::post('/createUsers', function (){
+    \App\Models\Employee::firstOrCreate([
+        'phone' => '+998901234567'
+    ]);
+
+    User::firstOrCreate([
+        'phone' => '+998901234567'
+    ]);
+});
 

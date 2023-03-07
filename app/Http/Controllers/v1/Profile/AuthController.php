@@ -29,7 +29,7 @@ class AuthController extends Controller
      *      @OA\JsonContent(
      *            example=
      *            {
-     *	           "phone": "+998335604715",
+     *	           "phone": "+998909101828",
      *             }
      *          ),
      *   ),
@@ -37,7 +37,7 @@ class AuthController extends Controller
      *     response=200,
      *     description="",
      *     @OA\JsonContent(
-     *         @OA\Property(property="data", type="array",  @OA\Items(ref="#/components/schemas/Company.v1.EmployeeResource")),
+     *         @OA\Property(property="data", type="array",  @OA\Items(ref="#/components/schemas/v1.Profile.EmployeeResource")),
      *     )
      *  ),
      *   @OA\Response(response=401, description="Не авторизован"),
@@ -65,7 +65,7 @@ class AuthController extends Controller
      *      @OA\JsonContent(
      *            example=
      *            {
-     *	           "phone": "+998335604715",
+     *	           "phone": "+998909101828",
      *	           "otp": "789456",
      *             }
      *          ),
@@ -74,7 +74,7 @@ class AuthController extends Controller
      *     response=200,
      *     description="",
      *     @OA\JsonContent(
-     *         @OA\Property(property="data", type="array",  @OA\Items(ref="#/components/schemas/Company.v1.EmployeeResource")),
+     *         @OA\Property(property="data", type="array",  @OA\Items(ref="#/components/schemas/v1.Profile.EmployeeResource")),
      *     )
      *  ),
      *   @OA\Response(response=401, description="Не авторизован"),

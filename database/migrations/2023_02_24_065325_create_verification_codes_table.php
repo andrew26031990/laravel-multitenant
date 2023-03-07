@@ -17,8 +17,10 @@ return new class extends Migration
             $table->id()->comment('ID сущности');
             $table->string('otp');
             $table->timestamp('expired_at');
-            $table->bigInteger('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
+            //$table->bigInteger('user_id')->unsigned();
+            $table->string('employee_id');
+            //$table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
+            $table->foreign('employee_id')->references('id')->on('users')->cascadeOnDelete();
             $table->timestamps();
         });
     }

@@ -15,6 +15,11 @@ class AppServiceProvider extends ServiceProvider
             \App\Repositories\EmployeeRepositoryInterface::class,
             \App\Repositories\Eloquent\EmployeeRepository::class
         );
+
+        $this->app->bind(
+            \App\Repositories\TenantRepositoryInterface::class,
+            \App\Repositories\Eloquent\TenantRepository::class
+        );
     }
 
     /**

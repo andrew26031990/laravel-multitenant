@@ -4,6 +4,7 @@ namespace App\Models\Tenant;
 
 
 use App\Models\Employee;
+use App\Models\Tenant;
 use App\Models\Test;
 use App\Models\VerificationCode;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -12,6 +13,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 use Stancl\Tenancy\Contracts\Syncable;
 use Stancl\Tenancy\Database\Concerns\ResourceSyncing;
+use Stancl\Tenancy\Database\Models\TenantPivot;
 
 class User extends Authenticatable implements Syncable
 {
@@ -19,9 +21,12 @@ class User extends Authenticatable implements Syncable
 
     use ResourceSyncing;
 
+    //protected $connection = 'pgsql';
     protected $guarded = [];
     public $timestamps = false;
 
+    public $keyType = 'string';
+    protected $primaryKey = 'id';
     //public $incrementing = false;
 
     /**
@@ -31,6 +36,8 @@ class User extends Authenticatable implements Syncable
      */
     protected $fillable = [
         'phone',
+        'first_name',
+        'last_name',
         'is_active',
     ];
 
@@ -52,6 +59,12 @@ class User extends Authenticatable implements Syncable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function tenants(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Tenant::class, 'tenant_users', 'user_id', 'tenant_id', 'id')
+            ->using(TenantPivot::class);
+    }
 
     public function tests()
     {
@@ -77,6 +90,8 @@ class User extends Authenticatable implements Syncable
     {
         return [
             'is_active',
+            'first_name',
+            'last_name'
         ];
     }
 }

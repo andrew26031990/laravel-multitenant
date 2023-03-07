@@ -10,7 +10,7 @@ use App\Repositories\EmployeeRepositoryInterface;
  */
 class EmployeeService
 {
-    public EmployeeRepository $employeeRepository;
+    public EmployeeRepositoryInterface $employeeRepository;
     public function __construct(EmployeeRepositoryInterface $employeeRepository) {
         $this->employeeRepository = $employeeRepository;
     }
@@ -30,7 +30,7 @@ class EmployeeService
     }
 
     public function update($attributes, $id, $load = [], $associate = []){
-        return $this->employeeRepository->update($id, $attributes, $load, $associate);
+        return $this->employeeRepository->update($attributes, $id, $load, $associate);
     }
 
     public function destroy($id){
@@ -45,5 +45,13 @@ class EmployeeService
 
     public function verifyOtp($request){
         return $this->employeeRepository->verifyOtp($request);
+    }
+
+    public function logout(){
+        $loggedOut = $this->employeeRepository->logout();
+        if(!$loggedOut){
+            throw new \Exception(__('Unable to log out'));
+        }
+        return 'Logged out';
     }
 }

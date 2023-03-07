@@ -1,0 +1,554 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Credit Broker 2.0",
+        "description": "Документация\n * Во всех ответах приходит объект: `data`, кроме ошибок: В ошибках `401` имеется только поле `message`; в ошибке `422` имеются поля: `errors и message`.\n * Для авторизованных запросов необходимо вставить в HEADER `Authorization ` Bearer токен полученный при авторизации. Пример:\n *     Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbM3MjlkIn0.eyJhdWQiOiI2IiwianRpIjoiYThlYjY3NGVjMzIyMmU3MWY5Nzk3MzMwMjU\n * Токен можно получить при входе в систему или регистрации. Сам токен будет расположен в ответе HEADER:\n *      X-Access-Token: eyJ0eXAiOiJKV1QiLCJhbM3MjlkIn0.eyJhdWQiOiI2IiwianRpIjoiYThlYjY3NGVjMzIyMmU3MWY5Nzk3MzMwMjU\n *      X-Access-Token-Expires-At: 2023-11-08 10:13:18\n *  Важно! На всех запросах, кроме DEV - необходимо отправлять в HEADER Platform-Code и Device-Id. Иначе будет приходить  `403 ошибка`\n *      Platform-Code: ios\n *      Device-Id: DFIE3232dD\n *\n * На всех запросах в HEADER ОБЯЗАТЕЛЬНО установить:\n *     Accept: application/json",
+        "contact": {
+            "email": "develop@tsay.uz"
+        },
+        "version": "2.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost",
+            "description": "API LOCAL SERVER"
+        },
+        {
+            "url": "https://api.sbi.retailbox.uz",
+            "description": "API DEVELOP SERVER"
+        }
+    ],
+    "paths": {
+        "/v1/company/tenants": {
+            "get": {
+                "tags": [
+                    "Компания"
+                ],
+                "summary": "Получения списка всех компаний",
+                "operationId": "abab7c3cff1bc5f76465bd41aa0f1661",
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "tenant": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/v1.Company.TenantResource"
+                                            }
+                                        },
+                                        "domain": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/v1.Company.DomainResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Не авторизован"
+                    },
+                    "403": {
+                        "description": "Контент не доступен"
+                    },
+                    "404": {
+                        "description": "Не найдено"
+                    },
+                    "422": {
+                        "description": "Валидация формы"
+                    },
+                    "429": {
+                        "description": "Бан запросов на 1 минуту"
+                    },
+                    "500": {
+                        "description": "Ошибка сервера"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": ""
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Компания"
+                ],
+                "summary": "Создание компании",
+                "operationId": "126555d6cae0476d17aa89880e3a0fca",
+                "requestBody": {
+                    "description": "Тело запроса OTP верификации",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {},
+                            "example": {
+                                "name": "Revo"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/v1.Company.TenantResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Не авторизован"
+                    },
+                    "403": {
+                        "description": "Контент не доступен"
+                    },
+                    "404": {
+                        "description": "Не найдено"
+                    },
+                    "422": {
+                        "description": "Валидация формы"
+                    },
+                    "429": {
+                        "description": "Бан запросов на 1 минуту"
+                    },
+                    "500": {
+                        "description": "Ошибка сервера"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": ""
+                    }
+                ]
+            }
+        },
+        "/v1/profile/auth/code": {
+            "post": {
+                "tags": [
+                    "Аутентификация"
+                ],
+                "summary": "Запрос на получение OTP кода",
+                "operationId": "980792548c543d23b400fdfc40148859",
+                "requestBody": {
+                    "description": "Тело запроса OTP аутентификации",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {},
+                            "example": {
+                                "phone": "+998909101828"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/v1.Profile.EmployeeResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Не авторизован"
+                    },
+                    "403": {
+                        "description": "Контент не доступен"
+                    },
+                    "404": {
+                        "description": "Не найдено"
+                    },
+                    "422": {
+                        "description": "Валидация формы"
+                    },
+                    "429": {
+                        "description": "Бан запросов на 1 минуту"
+                    },
+                    "500": {
+                        "description": "Ошибка сервера"
+                    }
+                }
+            }
+        },
+        "/v1/profile/auth/verify": {
+            "post": {
+                "tags": [
+                    "Аутентификация"
+                ],
+                "summary": "Запрос на верификацию OTP кода",
+                "operationId": "a26e62d6a45f89a5b79adb95119687ac",
+                "requestBody": {
+                    "description": "Тело запроса OTP верификации",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {},
+                            "example": {
+                                "phone": "+998909101828",
+                                "otp": "789456"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/v1.Profile.EmployeeResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Не авторизован"
+                    },
+                    "403": {
+                        "description": "Контент не доступен"
+                    },
+                    "404": {
+                        "description": "Не найдено"
+                    },
+                    "422": {
+                        "description": "Валидация формы"
+                    },
+                    "429": {
+                        "description": "Бан запросов на 1 минуту"
+                    },
+                    "500": {
+                        "description": "Ошибка сервера"
+                    }
+                }
+            }
+        },
+        "/v1/profile/employees/{id}": {
+            "get": {
+                "tags": [
+                    "Пользователь"
+                ],
+                "summary": "Получение информации о пользователе",
+                "operationId": "c79418e669d5ca1118c25aaf73bea6a9",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID пользователя",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/v1.Profile.EmployeeResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Не авторизован"
+                    },
+                    "403": {
+                        "description": "Контент не доступен"
+                    },
+                    "404": {
+                        "description": "Не найдено"
+                    },
+                    "422": {
+                        "description": "Валидация формы"
+                    },
+                    "429": {
+                        "description": "Бан запросов на 1 минуту"
+                    },
+                    "500": {
+                        "description": "Ошибка сервера"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": ""
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Пользователь"
+                ],
+                "summary": "Обновление информации о пользователе",
+                "operationId": "77ccf357d6eacb5de9b46f12fe3077de",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID пользователя",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "description": "Тело запроса для обновления данных пользователя",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {},
+                            "example": {
+                                "first_name": "Vasya",
+                                "last_name": "Pupkin"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/v1.Profile.EmployeeResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Не авторизован"
+                    },
+                    "403": {
+                        "description": "Контент не доступен"
+                    },
+                    "404": {
+                        "description": "Не найдено"
+                    },
+                    "422": {
+                        "description": "Валидация формы"
+                    },
+                    "429": {
+                        "description": "Бан запросов на 1 минуту"
+                    },
+                    "500": {
+                        "description": "Ошибка сервера"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": ""
+                    }
+                ]
+            }
+        },
+        "/v1/profile/employee/logout": {
+            "post": {
+                "tags": [
+                    "Пользователь"
+                ],
+                "summary": "Запрос на выход из системы",
+                "operationId": "a1d225dd3a872c73169e8948526f40a9",
+                "responses": {
+                    "200": {
+                        "description": ""
+                    },
+                    "401": {
+                        "description": "Не авторизован"
+                    },
+                    "403": {
+                        "description": "Контент не доступен"
+                    },
+                    "404": {
+                        "description": "Не найдено"
+                    },
+                    "422": {
+                        "description": "Валидация формы"
+                    },
+                    "429": {
+                        "description": "Бан запросов на 1 минуту"
+                    },
+                    "500": {
+                        "description": "Ошибка сервера"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": ""
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "v1.Company.DomainResource": {
+                "description": "Class DomainResource.",
+                "properties": {
+                    "id": {
+                        "description": "ID домена",
+                        "type": "string",
+                        "example": ""
+                    },
+                    "domain": {
+                        "description": "Название домена",
+                        "type": "string",
+                        "example": ""
+                    }
+                },
+                "type": "object"
+            },
+            "v1.Company.TenantResource": {
+                "description": "Class TenantResource.",
+                "properties": {
+                    "id": {
+                        "description": "ID компании",
+                        "type": "string",
+                        "example": ""
+                    },
+                    "name": {
+                        "description": "Название компании",
+                        "type": "string",
+                        "example": ""
+                    },
+                    "slug": {
+                        "description": "Slug",
+                        "type": "string",
+                        "example": ""
+                    },
+                    "tenancy_db_name": {
+                        "description": "База данных компании",
+                        "type": "string",
+                        "example": ""
+                    }
+                },
+                "type": "object"
+            },
+            "v1.Profile.EmployeeResource": {
+                "description": "Class EmployeeResource.",
+                "properties": {
+                    "id": {
+                        "description": "ID пользователя",
+                        "type": "integer",
+                        "example": ""
+                    },
+                    "phone": {
+                        "description": "Номер телефона пользователя",
+                        "type": "string",
+                        "example": ""
+                    },
+                    "first_name": {
+                        "description": "Имя",
+                        "type": "string",
+                        "example": ""
+                    },
+                    "last_name": {
+                        "description": "Фамилия",
+                        "type": "string",
+                        "example": ""
+                    },
+                    "is_active": {
+                        "description": "Статус пользователя",
+                        "type": "boolean",
+                        "example": ""
+                    },
+                    "created_at": {
+                        "description": "Дата создания сотрудника",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": ""
+                    },
+                    "updated_at": {
+                        "description": "Дата обновления сотрудника",
+                        "type": "string",
+                        "example": ""
+                    }
+                },
+                "type": "object"
+            },
+            "_CentralUser": {
+                "description": "App\\Models\\Employee"
+            },
+            "_TenantUser": {
+                "description": "App\\Models\\TenantUser"
+            },
+            "_VerificationCode": {
+                "description": "App\\Models\\VerificationCode"
+            }
+        },
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "description": "Пример: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjI0OT",
+                "name": "Authorization",
+                "in": "header",
+                "scheme": "bearer"
+            },
+            "Platform-Code": {
+                "type": "apiKey",
+                "description": "Код платформы",
+                "name": "Platform-Code",
+                "in": "header"
+            },
+            "Device-Id": {
+                "type": "apiKey",
+                "description": "ID устройства",
+                "name": "Device-Id",
+                "in": "header"
+            },
+            "Company-slug": {
+                "type": "apiKey",
+                "description": "Slug компании",
+                "name": "Company",
+                "in": "header"
+            }
+        }
+    }
+}

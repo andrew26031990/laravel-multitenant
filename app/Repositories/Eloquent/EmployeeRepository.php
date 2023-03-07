@@ -46,13 +46,13 @@ class EmployeeRepository implements EmployeeRepositoryInterface
 
 
     public function store($attributes, $load = []){
+        //dd($attributes);
         return $this
             ->model
             ->firstOrCreate($attributes);
     }
 
     public function update($attributes, $id, $load = []){
-
         $data = $this
             ->model
             ->findOrFail($id);
@@ -72,6 +72,7 @@ class EmployeeRepository implements EmployeeRepositoryInterface
 
     public function sendOtp($employee)
     {
+        //dd($employee);
         return $employee
             ->verificationCodes()
             ->create();
@@ -82,5 +83,10 @@ class EmployeeRepository implements EmployeeRepositoryInterface
         $employee = $this->model->wherePhone($request['phone'])->first();
         $employee->access = $employee->createToken('token');
         return $employee;
+    }
+
+    public function logout()
+    {
+        return auth()->user()->token()->revoke();
     }
 }

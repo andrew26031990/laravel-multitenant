@@ -45,8 +45,14 @@ class Employee extends Model implements SyncMaster
     protected $guarded = [];
     protected $fillable = [
         'phone',
+        'first_name',
+        'last_name',
         'is_active',
     ];
+
+    //protected $connection = 'pgsql';
+    public $keyType = 'string';
+    protected $primaryKey = 'id';
 
     public $timestamps = false;
     public $table = 'users';
@@ -61,7 +67,7 @@ class Employee extends Model implements SyncMaster
 
     public function verificationCodes(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(VerificationCode::class, 'user_id', 'id');
+        return $this->hasMany(VerificationCode::class);
     }
 
     public function getTenantModelName(): string
@@ -88,6 +94,8 @@ class Employee extends Model implements SyncMaster
     {
         return [
             'is_active',
+            'first_name',
+            'last_name'
         ];
     }
 }

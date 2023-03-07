@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Tenant;
 use App\Models\VerificationCode;
+use App\Observers\TenantObserver;
 use App\Observers\VerificationCodeObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -28,6 +30,7 @@ class EventServiceProvider extends ServiceProvider
     public function boot(): void
     {
         VerificationCode::observe(VerificationCodeObserver::class);
+        Tenant::observe(TenantObserver::class);
     }
 
     /**

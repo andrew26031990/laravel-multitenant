@@ -2,8 +2,8 @@
 
 namespace App\Repositories\Eloquent;
 
-use App\Models\Domain;
 use App\Repositories\DomainRepositoryInterface;
+use Stancl\Tenancy\Database\Models\Domain;
 
 /**
  *
@@ -23,7 +23,7 @@ class DomainRepository implements DomainRepositoryInterface
     }
 
     public function getList($request = null, $with = []){
-        
+
         return $this
             ->model
             //->when(true, function($query){
@@ -36,7 +36,7 @@ class DomainRepository implements DomainRepositoryInterface
 
 
     public function showById($id = null, $with = []){
-       
+
         return $this
             ->model
             ->with($with)
@@ -45,14 +45,14 @@ class DomainRepository implements DomainRepositoryInterface
 
 
     public function store($attributes, $load = []){
-        
+
         return $this
             ->model
             ->create($attributes);
     }
 
     public function update($attributes, $id, $load = []){
-        
+
         $data = $this
             ->model
             ->findOrFail($id);
@@ -63,7 +63,7 @@ class DomainRepository implements DomainRepositoryInterface
     }
 
     public function destroy($id){
-        
+
         return $this
             ->model
             ->findOrFail($id)
