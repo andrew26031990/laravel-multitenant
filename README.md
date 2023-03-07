@@ -14,3 +14,18 @@ sail artisan tenants:migrate
 sail artisan code:models
 
 sail artisan code:models --connection=pgsql_tenant
+
+
+#MY_COMMANDS
+
+sail up
+
+sail artisan migrate
+
+sail artisan tenants:migrate
+
+sail artisan passport:client --personal
+
+
+
+
