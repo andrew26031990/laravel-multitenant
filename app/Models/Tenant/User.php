@@ -3,6 +3,7 @@
 namespace App\Models\Tenant;
 
 
+use App\Models\CentralUser;
 use App\Models\Employee;
 use App\Models\Tenant;
 use App\Models\Test;
@@ -27,7 +28,7 @@ class User extends Authenticatable implements Syncable
 
     public $keyType = 'string';
     protected $primaryKey = 'id';
-    //public $incrementing = false;
+    public $incrementing = false;
 
     /**
      * The attributes that are mass assignable.
@@ -35,6 +36,7 @@ class User extends Authenticatable implements Syncable
      * @var array
      */
     protected $fillable = [
+        'id',
         'phone',
         'first_name',
         'last_name',
@@ -89,6 +91,7 @@ class User extends Authenticatable implements Syncable
     public function getSyncedAttributeNames(): array
     {
         return [
+            //'id',
             'is_active',
             'first_name',
             'last_name'

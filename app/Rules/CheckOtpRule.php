@@ -34,7 +34,7 @@ class CheckOtpRule implements Rule
      */
     public function passes($attribute, $value)
     {
-        $latestOtpRecord = Employee::wherePhone($this->phone)->firstOrCreate()->verificationCodes()->latest()->first();
+        $latestOtpRecord = Employee::wherePhone($this->phone)->firstOrFail()->verificationCodes()->latest()->first();
 
         if(Carbon::now() > $latestOtpRecord->expired_at){
             throw new OtpExpiredException(__('OTP expired'));

@@ -13,6 +13,8 @@ use Stancl\Tenancy\Database\Concerns\CentralConnection;
 use Stancl\Tenancy\Database\Concerns\ResourceSyncing;
 use Stancl\Tenancy\Database\Models\TenantPivot;
 
+use Illuminate\Foundation\Auth\User as Authenticatable;
+
 //use Illuminate\Database\Eloquent\SoftDeletes;
 
 //use Spatie\MediaLibrary\HasMedia;
@@ -27,7 +29,7 @@ use Stancl\Tenancy\Database\Models\TenantPivot;
  * @OA\Schema (schema="_CentralUser")
  */
 
-class Employee extends Model implements SyncMaster
+class Employee extends Authenticatable implements SyncMaster
     //implements
     //HasMedia
     //TranslatableContract
@@ -93,6 +95,7 @@ class Employee extends Model implements SyncMaster
     public function getSyncedAttributeNames(): array
     {
         return [
+            'id',
             'is_active',
             'first_name',
             'last_name'

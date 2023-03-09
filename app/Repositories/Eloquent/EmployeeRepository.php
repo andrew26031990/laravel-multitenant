@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Eloquent;
 
+use App\Models\CentralUser;
 use App\Models\Employee;
 use App\Repositories\EmployeeRepositoryInterface;
 use Illuminate\Support\Facades\DB;

@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\Exceptions\EmployeeInactiveException;
+use App\Exceptions\LogOutException;
 use App\Repositories\Eloquent\EmployeeRepository;
 use App\Repositories\EmployeeRepositoryInterface;
 
@@ -37,6 +39,9 @@ class EmployeeService
         return $this->employeeRepository->destroy($id);
     }
 
+    /**
+     * @throws EmployeeInactiveException
+     */
     public function sendOtp($request){
         $employee = $this->employeeRepository->store($request);
         $this->employeeRepository->sendOtp($employee);
@@ -47,11 +52,14 @@ class EmployeeService
         return $this->employeeRepository->verifyOtp($request);
     }
 
+    /**
+     * @throws \Exception
+     */
     public function logout(){
         $loggedOut = $this->employeeRepository->logout();
         if(!$loggedOut){
-            throw new \Exception(__('Unable to log out'));
+            throw new LogOutException(__('Unable to log out'));
         }
-        return 'Logged out';
+        return __('Logged out');
     }
 }
