@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('phone')->unique()->comment('Номер телефона');
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
-            $table->boolean('is_active')->default(true);
+            $table->boolean('is_active');
             $table->rememberToken();
             $table->timestamps();
         });
