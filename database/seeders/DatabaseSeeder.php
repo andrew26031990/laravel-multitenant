@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Employee;
 use App\Models\Tenant;
+use App\Models\Tenant\Product;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -28,6 +29,7 @@ class DatabaseSeeder extends Seeder
         //Создание доменов к тенантам (компаниям)
         \App\Models\Tenant::all()->runForEach(function ($tenant) {
             $tenant->domains()->create(['domain' => $tenant->slug.'.localhost']);
+            Product::factory(10)->create();
         });
 
     }
