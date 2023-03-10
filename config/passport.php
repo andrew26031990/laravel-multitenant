@@ -59,9 +59,9 @@ return [
         'secret' => env('PASSPORT_PERSONAL_ACCESS_CLIENT_SECRET'),
     ],
 
-    /*'storage' => [
+    'storage' => [
         'database' => [
             'connection' => 'tenant', // This was env('DB_CONNECTION', 'mysql')
         ],
-    ],*/
+    ],
 ];

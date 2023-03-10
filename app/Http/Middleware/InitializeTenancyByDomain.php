@@ -1,29 +1,43 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Http\Request;
+use Stancl\Tenancy\Middleware\IdentificationMiddleware;
+use Stancl\Tenancy\Resolvers\DomainTenantResolver;
+use Stancl\Tenancy\Tenancy;
 
-class InitializeTenancyByDomain
+class InitializeTenancyByDomain extends IdentificationMiddleware
 {
+    /** @var callable|null */
+    public static $onFail;
+
+    /** @var Tenancy */
+    protected $tenancy;
+
+    /** @var DomainTenantResolver */
+    protected $resolver;
+
+    public function __construct(Tenancy $tenancy, DomainTenantResolver $resolver)
+    {
+        $this->tenancy = $tenancy;
+        $this->resolver = $resolver;
+    }
+
     /**
      * Handle an incoming request.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
-     * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
+     * @param  \Closure  $next
+     * @return mixed
      */
-    public function handle(Request $request, Closure $next)
+    public function handle($request, Closure $next)
     {
-        //Skip for central domains
-        if(in_array($request->getHost(), config('tenancy.central_domains'), true)){
-            return $next($request);
-        }
-
-
-        return $this->initializeTenancy(
+        /*return $this->initializeTenancy(
             $request, $next, $request->getHost()
-        );
+        );*/
+        return $next($request);
     }
 }

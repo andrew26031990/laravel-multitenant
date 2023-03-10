@@ -83,6 +83,7 @@ class EmployeeRepository implements EmployeeRepositoryInterface
     {
         $employee = $this->model->wherePhone($request['phone'])->first();
         $employee->access = $employee->createToken('token');
+        session('user', $employee->access);
         return $employee;
     }
 

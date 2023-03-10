@@ -36,19 +36,7 @@ class TenantService
 
     public function store($attributes){
         $tenant = auth()->user()->tenants()->create($attributes);
-
-        /*$user = Employee::find(auth()->user()->getAuthIdentifier());
-        $tenant = $user->tenants()->create($attributes);*/
-
-
-        //dd($tenant);
-        /*$tenant = $this->tenantRepository->store($attributes, $load);
         $tenant->domains()->create(['domain' => $tenant->slug.'.'.config('tenancy.central_domains')[2]]);
-        $tenant->users()->sync(auth()->user()->getAuthIdentifier());
-        //tenancy()->initialize(Tenant::find($tenant->id));
-        //dump($tenant);
-        //dd(tenant('id'));
-        //User::create(auth()->user()->attributesToArray());*/
         return $tenant->load('domains');
     }
 

@@ -1,15 +1,14 @@
 <?php
 
 namespace App\Http\Middleware;
-
 use App\Exceptions\CompanyNotFoundException;
 use App\Models\Tenant;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use mysql_xdevapi\Exception;
-use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
-use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
+//use mysql_xdevapi\Exception;
+use App\Http\Middleware\InitializeTenancyByDomain;
+use App\Http\Middleware\PreventAccessFromCentralDomains;
 
 class CheckUserTenantMiddleware
 {
@@ -27,8 +26,10 @@ class CheckUserTenantMiddleware
             throw new CompanyNotFoundException(__('Company not found'));
         }
 
+        tenancy()->initialize($tenant);
+
         if(!$tenant->users->contains('id', auth()->user()->id)){
-            throw new Exception(__('User not belongs to Company'));
+            throw new \Exception(__('User not belongs to Company'));
         }
 
         return $next($request);
