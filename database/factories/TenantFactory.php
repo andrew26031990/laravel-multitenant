@@ -17,7 +17,7 @@ class TenantFactory extends Factory
      */
     public function definition()
     {
-        $name = $this->faker->name;
+        $name = $this->faker->firstName;
         return [
             'name' => $name,
             'slug' => Str::slug($name),

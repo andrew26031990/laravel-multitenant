@@ -44,6 +44,9 @@ class EmployeeService
      */
     public function sendOtp($request){
         $employee = $this->employeeRepository->store($request);
+        if(!$employee->is_active){
+            throw new EmployeeInactiveException('Account has been blocked');
+        }
         $this->employeeRepository->sendOtp($employee);
         return $employee;
     }

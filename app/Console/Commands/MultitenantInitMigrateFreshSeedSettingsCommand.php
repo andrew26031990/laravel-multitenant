@@ -15,7 +15,7 @@ class MultitenantInitMigrateFreshSeedSettingsCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'multitenant:init';
+    protected $signature = 'multitenant:test';
 
     /**
      * The console command description.
@@ -52,6 +52,10 @@ class MultitenantInitMigrateFreshSeedSettingsCommand extends Command
 
         $this->info('Applying Laravel Passport personal keys...');
         \Artisan::call('passport:client --personal --name=revo');
+        $this->info('Done');
+
+        $this->info('Refreshing testing database...');
+        \Artisan::call('migrate:fresh --env=testing');
         $this->info('Done');
 
         return Command::SUCCESS;
