@@ -4,7 +4,7 @@ namespace App\Exceptions;
 
 use Exception;
 
-class EmployeeInactiveException extends Exception
+class UserNotBelongsToCompanyException extends Exception
 {
     public $message = '';
 

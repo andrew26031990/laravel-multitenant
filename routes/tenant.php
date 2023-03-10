@@ -2,12 +2,8 @@
 
 declare(strict_types=1);
 
-use App\Models\Tenant\User;
-use Illuminate\Support\Facades\Route;
-use App\Http\Middleware\CheckTenantForMaintenanceMode;
 use App\Http\Middleware\InitializeTenancyByDomain;
-use App\Http\Middleware\ScopeSessions;
-use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,12 +29,11 @@ Route::middleware([
         function () {
             Route::group(
                 [
-                    'prefix' => 'company',
+                    'prefix' => 'tenant',
                 ],
                 function () {
-                    Route::apiResource('products', \App\Http\Controllers\v1\Company\ProductController::class);
+                    Route::apiResource('products', \App\Http\Controllers\v1\Tenant\ProductController::class);
                 });
         }
     );
-
 });

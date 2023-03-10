@@ -17,6 +17,6 @@ class CompanyNotFoundException extends Exception
 
     public function render($request)
     {
-        return response()->json(["message" => $this->message, 'success' => false], 410);
+        return response()->json(["message" => $this->message, 'success' => false], 404);
     }
 }

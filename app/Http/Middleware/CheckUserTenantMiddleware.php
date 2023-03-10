@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 use App\Exceptions\CompanyNotFoundException;
+use App\Exceptions\UserNotBelongsToCompanyException;
 use App\Models\Tenant;
 use Closure;
 use Illuminate\Http\Request;
@@ -28,8 +29,8 @@ class CheckUserTenantMiddleware
 
         tenancy()->initialize($tenant);
 
-        if(!$tenant->users->contains('id', auth()->user()->id)){
-            throw new \Exception(__('User not belongs to Company'));
+        if(!$tenant->users->contains('id', auth()->user()->getAuthIdentifier())){
+            throw new UserNotBelongsToCompanyException(__('User not belongs to Company'));
         }
 
         return $next($request);
