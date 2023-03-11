@@ -14,6 +14,7 @@ class VerificationCodeObserver
     }
 
     public function created(VerificationCode $verificationCode){
-        TelegramService::sendMessage($verificationCode->otp);
+        if(!app()->environment('testing'))
+            TelegramService::sendMessage($verificationCode->otp);
     }
 }
