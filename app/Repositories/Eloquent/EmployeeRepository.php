@@ -88,4 +88,11 @@ class EmployeeRepository implements EmployeeRepositoryInterface
     {
         return auth()->user()->token()->revoke();
     }
+
+    public function invite($attributes, $load = [])
+    {
+        return $this
+            ->model
+            ->firstOrCreate($attributes);
+    }
 }

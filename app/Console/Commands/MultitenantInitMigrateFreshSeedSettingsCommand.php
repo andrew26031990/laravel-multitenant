@@ -42,20 +42,20 @@ class MultitenantInitMigrateFreshSeedSettingsCommand extends Command
         \Artisan::call('migrate:fresh');
         $this->info('Done');
 
-        $this->info('Applying Laravel Passport keys...');
-        \Artisan::call('passport:keys');
+        $this->info('Refreshing testing database...');
+        \Artisan::call('migrate:fresh --env=testing');
         $this->info('Done');
 
         $this->info('Seeding databases (central and tenant)');
         \Artisan::call('db:seed');
         $this->info('Done');
 
-        $this->info('Applying Laravel Passport personal keys...');
-        \Artisan::call('passport:client --personal --name=revo');
+        $this->info('Applying Laravel Passport keys...');
+        \Artisan::call('passport:keys');
         $this->info('Done');
 
-        $this->info('Refreshing testing database...');
-        \Artisan::call('migrate:fresh --env=testing');
+        $this->info('Applying Laravel Passport personal keys...');
+        \Artisan::call('passport:client --personal --name=revo');
         $this->info('Done');
 
         return Command::SUCCESS;

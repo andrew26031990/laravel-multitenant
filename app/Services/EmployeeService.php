@@ -44,9 +44,9 @@ class EmployeeService
      */
     public function sendOtp($request){
         $employee = $this->employeeRepository->store($request);
-        if(!$employee->is_active){
+        /*if(!$employee->is_active){
             throw new EmployeeInactiveException('Account has been blocked');
-        }
+        }*/
         $this->employeeRepository->sendOtp($employee);
         return $employee;
     }
@@ -64,5 +64,9 @@ class EmployeeService
             throw new LogOutException(__('Unable to log out'));
         }
         return __('Logged out');
+    }
+
+    public function invite($attributes, $load = []){
+        return $this->employeeRepository->invite($attributes);
     }
 }

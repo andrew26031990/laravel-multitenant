@@ -26,16 +26,6 @@ class TenantTest extends TestCase
      *
      * @return void
      */
-    /*public function test_example()
-    {
-        $response = $this->get('/');
-
-        $response->assertStatus(200);
-    }*/
-
-    /*public function testUser(){
-        dd(mockUser()->access->accessToken);
-    }*/
 
     //index
     public function testGetTenants()
@@ -45,7 +35,11 @@ class TenantTest extends TestCase
             'name' => Str::random(10)
         ];
 
-        $this->actingAs($user, 'api')->withHeaders(['Accept'=>'application/json'])->post('http://localhost/v1/company/tenants', $data)->content();
+        $this->actingAs($user, 'api')
+            ->withHeaders(['Accept'=>'application/json'])
+            ->post('http://localhost/v1/company/tenants', $data)
+            ->content();
+
         $this->actingAs($user, 'api')
             ->json('get', 'http://localhost/v1/company/tenants')
             ->assertJsonStructure([
@@ -56,81 +50,122 @@ class TenantTest extends TestCase
                     ]
                 ]
             ]);
+        $this->artisan('migrate:fresh --env=testing');
     }
 
 
     //store
-    /*public function testCreateTenant()
+    public function testCreateTenant()
     {
-        $data = [
-            'name' => fake()->firstName
-        ];
-
-        \DB::beginTransaction();
-        try {
-            $this->actingAs(mockUser(), 'api')
-                ->json('post', 'http://localhost/v1/company/tenants', $data)
-                ->assertJsonStructure([
-                    'name',
-                    'slug'
-                ]);
-            \DB::commit();
-        }catch (\Exception $exception){
-            \DB::rollback();
-        }
-    }*/
-
-    /*public function testGetSingleTenant()
-    {
-        $data = [
-            'name' => fake()->firstName
-        ];
-
         $user = mockUser();
-
-        DB::transaction(function () use($user, $data){
-            dd($this->actingAs($user, 'api')
-                ->json('post', 'http://localhost/v1/company/tenants', $data)->content());
-        });
-
-        dd('$tenant');
+        $data = [
+            'name' => Str::random(10)
+        ];
 
         $this->actingAs($user, 'api')
-            ->json('get', 'http://localhost/v1/company/tenants/'.$tenant->id)
+            ->withHeaders(['Accept'=>'application/json'])
+            ->post('http://localhost/v1/company/tenants', $data)
             ->assertJsonStructure([
-                'name',
-                'slug'
+                'data' => [
+                    'name',
+                    'slug'
+                ]
             ]);
+        $this->artisan('migrate:fresh --env=testing');
     }
 
-    public function getDeleteTenant()
+    //show
+    public function testShowTenant()
     {
-        $tenantName = \Str::random(10);
-        $tenant = Tenant::create(
-            [
-                'name' => $tenantName,
-                'slug' => Str::slug($tenantName)
-            ]
-        );
-        $result = app(TenantService::class)->destroy($tenant->id);
-        $this->assertTrue($result);
+        $user = mockUser();
+        $data = [
+            'name' => Str::random(10)
+        ];
+
+        $tenant = $this->actingAs($user, 'api')
+            ->withHeaders(['Accept'=>'application/json'])
+            ->post('http://localhost/v1/company/tenants', $data)
+            ->content();
+
+        $this->actingAs($user, 'api')
+            ->get('http://localhost/v1/company/tenants/'.json_decode($tenant)->data->id)
+            ->assertJsonStructure([
+                'data' => [
+                    'name',
+                    'slug'
+                ]
+            ]);
+
+        $this->artisan('migrate:fresh --env=testing');
+    }
+
+    //update
+    /*public function testUpdateTenant()
+    {
+        $user = mockUser();
+        $data = [
+            'name' => Str::random(10)
+        ];
+
+        $tenant = $this->actingAs($user, 'api')
+            ->withHeaders(['Accept'=>'application/json'])
+            ->post('http://localhost/v1/company/tenants', $data)
+            ->content();
+
+        $dataToUpdate = [
+            'name' => Str::random(10),
+        ];
+
+        $updatedTenant = $this->actingAs($user, 'api')
+            ->put('http://localhost/v1/company/tenants/'.json_decode($tenant)->data->id, $dataToUpdate)->content();
+
+        $this->assertEquals($dataToUpdate['name'], json_decode($updatedTenant)->data->name);
+
+        $this->artisan('migrate:fresh --env=testing');
+    }*/
+
+    //delete
+    public function testDeleteTenant()
+    {
+        $user = mockUser();
+        $data = [
+            'name' => Str::random(10)
+        ];
+
+        $tenant = $this->actingAs($user, 'api')
+            ->withHeaders(['Accept' => 'application/json'])
+            ->post('http://localhost/v1/company/tenants', $data)
+            ->content();
+
+
+        $this->actingAs($user, 'api')
+            ->delete('http://localhost/v1/company/tenants/' . json_decode($tenant)->data->id)
+            ->assertSee('1')
+            ->assertStatus(200);
+
+        $this->artisan('migrate:fresh --env=testing');
     }
 
     public function testDatabaseCreatedAfterTenantWasCreated(){
-        $tenantName = \Str::random(10);
-        $tenant = Tenant::create(
-            [
-                'name' => $tenantName,
-                'slug' => Str::slug($tenantName)
-            ]
-        );
+        $user = mockUser();
+        $data = [
+            'name' => Str::random(10)
+        ];
+
+        $tenant = $this->actingAs($user, 'api')
+            ->withHeaders(['Accept'=>'application/json'])
+            ->post('http://localhost/v1/company/tenants', $data)
+            ->content();
+
         $query = "SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME =  ?";
-        $db = DB::select($query, ['tenant_'.$tenant->id.'_db']);
+        $db = DB::select($query, ['tenant_'.json_decode($tenant)->data->id.'_db']);
         if (empty($db)) {
             $this->assertTrue(true);
         } else {
             $this->assertFalse(false);
         }
-    }*/
+
+        $this->artisan('migrate:fresh --env=testing');
+    }
 
 }

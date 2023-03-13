@@ -10,4 +10,8 @@ class TenantObserver
         $tenant->id = \Str::uuid();
         $tenant->slug = \Str::kebab($tenant->name);
     }
+
+    public function updating(Tenant $tenant){
+        $tenant->slug = \Str::kebab($tenant->name);
+    }
 }

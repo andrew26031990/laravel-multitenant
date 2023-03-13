@@ -32,7 +32,14 @@ Route::middleware([
                     'prefix' => 'tenant',
                 ],
                 function () {
-                    Route::apiResource('products', \App\Http\Controllers\v1\Tenant\ProductController::class);
+                    Route::apiResource('products', \App\Http\Controllers\v1\Company\ProductController::class);
+                });
+            Route::group(
+                [
+                    'prefix' => 'employee',
+                ],
+                function () {
+                    Route::post('invite', [\App\Http\Controllers\v1\Profile\EmployeeController::class, 'invite']);
                 });
         }
     );

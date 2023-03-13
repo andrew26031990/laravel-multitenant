@@ -10,7 +10,7 @@ abstract class TestCase extends BaseTestCase
 {
     use CreatesApplication;
 
-    /*protected $tenancy = false;
+    protected $tenancy = false;
 
     public function setUp(): void
     {
@@ -23,8 +23,8 @@ abstract class TestCase extends BaseTestCase
 
     public function initializeTenancy()
     {
-        $tenant = Tenant::create(['name' => Str::random(10)]);
+        $tenant = Tenant::create(['name' => substr(str_shuffle(str_repeat("abcdefghijklmnopqrstuvwxyz", 7)), 0, 7)]);
 
         tenancy()->initialize($tenant);
-    }*/
+    }
 }

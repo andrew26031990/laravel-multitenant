@@ -43,7 +43,7 @@ Route::group(
                 'middleware' => 'auth:api'
             ],
             function () {
-                Route::apiResource('tenants', \App\Http\Controllers\v1\Company\TenantController::class)->only('index', 'store');
+                Route::apiResource('tenants', \App\Http\Controllers\v1\Company\TenantController::class);
             });
     }
 );

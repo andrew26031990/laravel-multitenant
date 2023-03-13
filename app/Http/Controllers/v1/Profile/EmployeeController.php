@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\v1\Profile;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\v1\Company\inviteEmployeeToCompanyRequest;
 use App\Http\Requests\v1\Profile\updateEmployeeRequest;
 use App\Http\Resources\v1\Profile\EmployeeResource;
 use App\Services\EmployeeService;
@@ -18,18 +19,18 @@ class EmployeeController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function index()
     {
-        // privet
+        return EmployeeResource::collection($this->employeeService->getList());
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function store(Request $request)
     {
@@ -146,5 +147,9 @@ class EmployeeController extends Controller
      */
     public function logout(){
         return $this->employeeService->logout();
+    }
+
+    public function invite(inviteEmployeeToCompanyRequest $request){
+        return new EmployeeResource($this->employeeService->invite($request->validated()));
     }
 }

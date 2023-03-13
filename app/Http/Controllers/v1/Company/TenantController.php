@@ -86,11 +86,11 @@ class TenantController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return TenantResource
      */
     public function show($id)
     {
-        //
+        return new TenantResource($this->tenantService->showById($id));
     }
 
     /**
@@ -109,10 +109,10 @@ class TenantController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return TenantResource
      */
     public function destroy($id)
     {
-        //
+        return $this->tenantService->destroy($id);
     }
 }

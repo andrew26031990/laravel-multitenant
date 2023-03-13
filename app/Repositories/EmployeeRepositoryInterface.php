@@ -19,4 +19,6 @@ interface EmployeeRepositoryInterface
     public function verifyOtp($request);
 
     public function logout();
+
+    public function invite($attributes, $load = []);
 }
