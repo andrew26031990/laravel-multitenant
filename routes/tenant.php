@@ -33,6 +33,9 @@ Route::middleware([
                 ],
                 function () {
                     Route::apiResource('products', \App\Http\Controllers\v1\Company\ProductController::class);
+                    Route::get('/employees', function (){
+                        return \App\Models\Tenant\User::all();
+                    });
                 });
             Route::group(
                 [

@@ -4,6 +4,8 @@ namespace App\Services;
 
 use App\Exceptions\EmployeeInactiveException;
 use App\Exceptions\LogOutException;
+use App\Models\Employee;
+use App\Models\Tenant\User;
 use App\Repositories\Eloquent\EmployeeRepository;
 use App\Repositories\EmployeeRepositoryInterface;
 
@@ -67,6 +69,10 @@ class EmployeeService
     }
 
     public function invite($attributes, $load = []){
+        $attributes['is_active'] = true;
+        //tenancy()->initialize(tenant());
+        User::firstOrCreate($attributes);
+        dd('here');
         return $this->employeeRepository->invite($attributes);
     }
 }

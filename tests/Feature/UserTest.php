@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\Employee;
 use App\Models\Tenant;
+use App\Models\Tenant\User;
 use App\Models\VerificationCode;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -120,7 +121,7 @@ class UserTest extends TestCase
     /**
      * @throws TenantCouldNotBeIdentifiedById
      */
-    /*public function testUserInvitation(){
+    public function testUserInvitation(){
         $user = mockUser();
 
         $dataTenant = [
@@ -134,9 +135,18 @@ class UserTest extends TestCase
 
         $data = [
             'phone' => '+998909101828',
+            'isa_active' => true
         ];
 
-        tenancy()->initialize(tenancy()->tenant);
+        $user = new User();
+
+        tenant($tenant->id)->run(function () use($data, &$user){
+            $user = User::create($data);
+        });
+
+        dd($user);
+
+
 
         $this->actingAs($user, 'api')
             ->json('post', 'http://'.tenancy()->tenant->getChanges()['slug'].'.localhost/v1/employee/invite', $data)
@@ -151,5 +161,5 @@ class UserTest extends TestCase
             ]);
 
         $this->artisan('migrate:fresh --env=testing');
-    }*/
+    }
 }

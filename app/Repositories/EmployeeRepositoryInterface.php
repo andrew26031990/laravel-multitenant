@@ -20,5 +20,5 @@ interface EmployeeRepositoryInterface
 
     public function logout();
 
-    public function invite($attributes, $load = []);
+    public function invite($attributes, $tenant, $load = []);
 }
