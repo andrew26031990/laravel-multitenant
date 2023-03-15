@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-interface EmployeeRepositoryInterface
+interface CentralUserRepositoryInterface
 {
     public function getList($request = null, $with = []);
 

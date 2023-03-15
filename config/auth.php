@@ -67,7 +67,7 @@ return [
         'users' => [
             'driver' => 'eloquent',
             //'model' => \App\Models\Tenant\User::class,
-            'model' => \App\Models\Employee::class,
+            'model' => \App\Models\CentralUser::class,
         ],
 
         // 'users' => [

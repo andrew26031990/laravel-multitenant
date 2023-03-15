@@ -34,5 +34,4 @@ class UserService
     public function destroy($id){
         return $this->user->destroy($id);
     }
-
 }

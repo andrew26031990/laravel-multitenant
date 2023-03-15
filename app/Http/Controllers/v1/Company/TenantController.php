@@ -23,7 +23,7 @@ class TenantController extends Controller
      *     security={ {"bearerAuth" : ""} },
      *   tags={"Компания"},
      *   path="/v1/company/tenants",
-     *   summary="Получения списка всех компаний",
+     *   summary="Получения списка всех компаний пользователя",
      *   @OA\Response(
      *     response=200,
      *     description="",

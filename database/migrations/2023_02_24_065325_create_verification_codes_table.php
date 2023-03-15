@@ -18,9 +18,9 @@ return new class extends Migration
             $table->string('otp');
             $table->timestamp('expired_at');
             //$table->bigInteger('user_id')->unsigned();
-            $table->string('employee_id');
+            $table->string('central_user_id');
             //$table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
-            $table->foreign('employee_id')->references('id')->on('users')->cascadeOnDelete();
+            $table->foreign('central_user_id')->references('id')->on('users')->cascadeOnDelete();
             $table->timestamps();
         });
     }

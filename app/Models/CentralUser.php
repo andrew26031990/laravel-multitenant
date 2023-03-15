@@ -25,11 +25,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 //use Astrotomic\Translatable\Translatable;
 
 /**
- * App\Models\Employee
+ * App\Models\CentralUser
  * @OA\Schema (schema="_CentralUser")
  */
 
-class Employee extends Authenticatable implements SyncMaster
+class CentralUser extends Authenticatable implements SyncMaster
     //implements
     //HasMedia
     //TranslatableContract
@@ -98,7 +98,10 @@ class Employee extends Authenticatable implements SyncMaster
             'id',
             'is_active',
             'first_name',
-            'last_name'
+            'last_name',
+            'created_at',
+            'updated_at',
+            'deleted_at',
         ];
     }
 }

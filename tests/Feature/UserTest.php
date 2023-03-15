@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Models\Employee;
+use App\Models\CentralUser;
 use App\Models\Tenant;
 use App\Models\Tenant\User;
 use App\Models\VerificationCode;
@@ -50,7 +50,7 @@ class UserTest extends TestCase
 
     //verifyOTP
     public function testVerifyOtp(){
-        $this->assertInstanceOf(Employee::class, mockUser());
+        $this->assertInstanceOf(CentralUser::class, mockUser());
         $this->artisan('migrate:fresh --env=testing');
     }
 

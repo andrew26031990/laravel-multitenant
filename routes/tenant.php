@@ -33,6 +33,7 @@ Route::middleware([
                 ],
                 function () {
                     Route::apiResource('products', \App\Http\Controllers\v1\Company\ProductController::class);
+                    Route::apiResource('users', \App\Http\Controllers\v1\Company\UserController::class);
                     Route::get('/employees', function (){
                         return \App\Models\Tenant\User::all();
                     });
@@ -42,7 +43,7 @@ Route::middleware([
                     'prefix' => 'employee',
                 ],
                 function () {
-                    Route::post('invite', [\App\Http\Controllers\v1\Profile\EmployeeController::class, 'invite']);
+                    Route::post('invite', [\App\Http\Controllers\v1\Profile\CentralUserController::class, 'invite']);
                 });
         }
     );

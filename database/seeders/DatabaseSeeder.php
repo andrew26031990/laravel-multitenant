@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use App\Models\Employee;
+use App\Models\CentralUser;
 use App\Models\Tenant;
 use App\Models\Tenant\Product;
 use Illuminate\Database\Seeder;
@@ -20,9 +20,9 @@ class DatabaseSeeder extends Seeder
         ]);
 
         //Создание пользователей с тенантами (компаниями) и их связка через pivot таблицу
-        Employee::factory()->count(3)
+        CentralUser::factory()->count(1)
             ->has(
-                Tenant::factory()->count(3),
+                Tenant::factory()->count(1),
             )
             ->create();
 

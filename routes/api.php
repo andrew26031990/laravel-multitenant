@@ -22,19 +22,13 @@ Route::group(
                     function (){
                         Route::post('code', [\App\Http\Controllers\v1\Profile\AuthController::class, 'getCode']);
                         Route::post('verify', [\App\Http\Controllers\v1\Profile\AuthController::class, 'verifyCode']);
+                        Route::post('logout', [\App\Http\Controllers\v1\Profile\AuthController::class, 'logout']);
                 });
                 Route::group(
                     [
                         'middleware' => 'auth:api'
                 ],function (){
-                    Route::apiResource('employees', \App\Http\Controllers\v1\Profile\EmployeeController::class);
-                    Route::group(
-                        [
-                            'prefix' => 'employee'
-                        ],
-                        function (){
-                            Route::post('logout', [\App\Http\Controllers\v1\Profile\EmployeeController::class, 'logout']);
-                        });
+                    Route::apiResource('users', \App\Http\Controllers\v1\Profile\CentralUserController::class);
                 });
         });
         Route::group(

@@ -4,18 +4,20 @@ namespace App\Services;
 
 use App\Exceptions\EmployeeInactiveException;
 use App\Exceptions\LogOutException;
-use App\Models\Employee;
+use App\Models\CentralUser;
 use App\Models\Tenant\User;
-use App\Repositories\Eloquent\EmployeeRepository;
-use App\Repositories\EmployeeRepositoryInterface;
+use App\Repositories\Eloquent\CentralUserRepository;
+use App\Repositories\CentralUserRepositoryInterface;
+use App\Repositories\UserRepositoryInterface;
 
 /**
  * Class EmployeeService.
  */
 class EmployeeService
 {
-    public EmployeeRepositoryInterface $employeeRepository;
-    public function __construct(EmployeeRepositoryInterface $employeeRepository) {
+    public CentralUserRepositoryInterface $employeeRepository;
+
+    public function __construct(CentralUserRepositoryInterface $employeeRepository) {
         $this->employeeRepository = $employeeRepository;
     }
 
@@ -66,13 +68,5 @@ class EmployeeService
             throw new LogOutException(__('Unable to log out'));
         }
         return __('Logged out');
-    }
-
-    public function invite($attributes, $load = []){
-        $attributes['is_active'] = true;
-        //tenancy()->initialize(tenant());
-        User::firstOrCreate($attributes);
-        dd('here');
-        return $this->employeeRepository->invite($attributes);
     }
 }

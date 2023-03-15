@@ -4,7 +4,6 @@ namespace App\Models\Tenant;
 
 
 use App\Models\CentralUser;
-use App\Models\Employee;
 use App\Models\Tenant;
 use App\Models\Test;
 use App\Models\VerificationCode;
@@ -85,7 +84,7 @@ class User extends Authenticatable implements Syncable
 
     public function getCentralModelName(): string
     {
-        return Employee::class;
+        return CentralUser::class;
     }
 
     public function getSyncedAttributeNames(): array
@@ -94,7 +93,10 @@ class User extends Authenticatable implements Syncable
             //'id',
             'is_active',
             'first_name',
-            'last_name'
+            'last_name',
+            'created_at',
+            'updated_at',
+            'deleted_at',
         ];
     }
 }

@@ -48,7 +48,7 @@ class UserRepository implements UserRepositoryInterface
 
         return $this
             ->model
-            ->create($attributes);
+            ->firstOrCreate($attributes);
     }
 
     public function update($attributes, $id, $load = []){

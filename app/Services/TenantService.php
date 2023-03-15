@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Models\Employee;
+use App\Models\CentralUser;
 use App\Models\Tenant;
 use App\Models\Tenant\User;
 use App\Models\TenantUser;

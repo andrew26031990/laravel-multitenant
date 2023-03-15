@@ -3,23 +3,22 @@
 namespace App\Repositories\Eloquent;
 
 use App\Models\CentralUser;
-use App\Models\Employee;
-use App\Repositories\EmployeeRepositoryInterface;
+use App\Repositories\CentralUserRepositoryInterface;
 use Illuminate\Support\Facades\DB;
 
 /**
  *
- * Class EmployeeRepository.
+ * Class CentralUserRepository.
  *
- * @mixin \App\Models\Employee
+ * @mixin \App\Models\CentralUser
  *
  */
-class EmployeeRepository implements EmployeeRepositoryInterface
+class CentralUserRepository implements CentralUserRepositoryInterface
 {
 
-    protected Employee $model;
+    protected CentralUser $model;
 
-    public function __construct(Employee $model)
+    public function __construct(CentralUser $model)
     {
         $this->model = $model;
     }

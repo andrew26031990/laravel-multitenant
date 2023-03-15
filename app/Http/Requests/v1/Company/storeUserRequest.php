@@ -4,7 +4,7 @@ namespace App\Http\Requests\v1\Company;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class inviteEmployeeToCompanyRequest extends FormRequest
+class storeUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

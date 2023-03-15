@@ -22,7 +22,7 @@ class Tenant extends BaseTenant implements TenantWithDatabase
 
     public function users()
     {
-        return $this->belongsToMany(Employee::class, 'tenant_users', 'tenant_id', 'user_id', 'id')
+        return $this->belongsToMany(CentralUser::class, 'tenant_users', 'tenant_id', 'user_id', 'id')
             ->using(TenantPivot::class);
     }
 

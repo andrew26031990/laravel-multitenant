@@ -7,13 +7,13 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
  *
- * Class EmployeeResource.
- * @OA\Schema (schema="v1.Profile.EmployeeResource")
- * @mixin \App\Models\Employee
+ * Class UserResource.
+ * @OA\Schema (schema="v1.Profile.UserResource")
+ * @mixin \App\Models\CentralUser
  *
  */
 
-class EmployeeResource extends JsonResource
+class UserResource extends JsonResource
 {
 
     /**

@@ -5,7 +5,6 @@ namespace App\Rules;
 use App\Exceptions\OtpExpiredException;
 use App\Exceptions\OtpInvalidException;
 use App\Models\CentralUser;
-use App\Models\Employee;
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Support\Carbon;
 
@@ -34,7 +33,7 @@ class CheckOtpRule implements Rule
      */
     public function passes($attribute, $value)
     {
-        $latestOtpRecord = Employee::wherePhone($this->phone)->firstOrFail()->verificationCodes()->latest()->first();
+        $latestOtpRecord = CentralUser::wherePhone($this->phone)->firstOrFail()->verificationCodes()->latest()->first();
 
         if(Carbon::now() > $latestOtpRecord->expired_at){
             throw new OtpExpiredException(__('OTP expired'));

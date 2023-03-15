@@ -26,8 +26,8 @@ class RepositoryProvider extends ServiceProvider
         );
 
         $this->app->bind(
-            \App\Repositories\EmployeeRepositoryInterface::class,
-            \App\Repositories\Eloquent\EmployeeRepository::class
+            \App\Repositories\CentralUserRepositoryInterface::class,
+            \App\Repositories\Eloquent\CentralUserRepository::class
         );
 
         $this->app->bind(

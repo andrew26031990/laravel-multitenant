@@ -2,11 +2,11 @@
 
 namespace App\Observers;
 
-use App\Models\Employee;
+use App\Models\CentralUser;
 
 class EmployeeObserver
 {
-    public function creating(Employee $employee){
+    public function creating(CentralUser $employee){
         //$employee->is_active = true;
     }
 }

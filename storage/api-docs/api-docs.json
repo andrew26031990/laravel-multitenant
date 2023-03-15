@@ -14,6 +14,15 @@
             "description": "API LOCAL SERVER"
         },
         {
+            "url": "http://{tenant}.localhost",
+            "description": "API LOCAL SERVER WITH TENANT",
+            "variables": {
+                "tenant": {
+                    "default": "tenant"
+                }
+            }
+        },
+        {
             "url": "https://api.sbi.retailbox.uz",
             "description": "API DEVELOP SERVER"
         }
@@ -24,7 +33,7 @@
                 "tags": [
                     "Компания"
                 ],
-                "summary": "Получения списка всех компаний",
+                "summary": "Получения списка всех компаний пользователя",
                 "operationId": "abab7c3cff1bc5f76465bd41aa0f1661",
                 "responses": {
                     "200": {
@@ -139,6 +148,309 @@
                 ]
             }
         },
+        "/v1/tenant/users": {
+            "get": {
+                "tags": [
+                    "Пользователь компании"
+                ],
+                "summary": "Получение всех пользователей компании",
+                "operationId": "6c54834ffa632478b688f87b37f25c66",
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/v1.Profile.UserResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Не авторизован"
+                    },
+                    "403": {
+                        "description": "Контент не доступен"
+                    },
+                    "404": {
+                        "description": "Не найдено"
+                    },
+                    "422": {
+                        "description": "Валидация формы"
+                    },
+                    "429": {
+                        "description": "Бан запросов на 1 минуту"
+                    },
+                    "500": {
+                        "description": "Ошибка сервера"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": ""
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Пользователь компании"
+                ],
+                "summary": "Добавление пользователя в компанию",
+                "operationId": "53b30e6e162189f76f7c86bc87a13d75",
+                "requestBody": {
+                    "description": "Тело запроса на добавление пользователя в компанию",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {},
+                            "example": {
+                                "phone": "+998909101828"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/v1.Profile.UserResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Не авторизован"
+                    },
+                    "403": {
+                        "description": "Контент не доступен"
+                    },
+                    "404": {
+                        "description": "Не найдено"
+                    },
+                    "422": {
+                        "description": "Валидация формы"
+                    },
+                    "429": {
+                        "description": "Бан запросов на 1 минуту"
+                    },
+                    "500": {
+                        "description": "Ошибка сервера"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": ""
+                    }
+                ]
+            }
+        },
+        "/v1/tenant/users/{id}": {
+            "get": {
+                "tags": [
+                    "Пользователь компании"
+                ],
+                "summary": "Получение информации о пользователе в компании",
+                "operationId": "db0a54e9680b7d14f57552ee02448103",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID пользователя",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/v1.Profile.UserResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Не авторизован"
+                    },
+                    "403": {
+                        "description": "Контент не доступен"
+                    },
+                    "404": {
+                        "description": "Не найдено"
+                    },
+                    "422": {
+                        "description": "Валидация формы"
+                    },
+                    "429": {
+                        "description": "Бан запросов на 1 минуту"
+                    },
+                    "500": {
+                        "description": "Ошибка сервера"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": ""
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Пользователь компании"
+                ],
+                "summary": "Обновление информации о пользователе компании",
+                "operationId": "864e9e3aa5591628e87885e95bc65304",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID пользователя",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "description": "Тело запроса для обновления данных пользователя",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {},
+                            "example": {
+                                "first_name": "Vasya",
+                                "last_name": "Pupkin"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/v1.Profile.UserResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Не авторизован"
+                    },
+                    "403": {
+                        "description": "Контент не доступен"
+                    },
+                    "404": {
+                        "description": "Не найдено"
+                    },
+                    "422": {
+                        "description": "Валидация формы"
+                    },
+                    "429": {
+                        "description": "Бан запросов на 1 минуту"
+                    },
+                    "500": {
+                        "description": "Ошибка сервера"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": ""
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Пользователь компании"
+                ],
+                "summary": "Удаление пользователя из компании",
+                "operationId": "0bfdcc93d1dc34dd6cb9e7e24d2b3f60",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID пользователя",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/v1.Profile.UserResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Не авторизован"
+                    },
+                    "403": {
+                        "description": "Контент не доступен"
+                    },
+                    "404": {
+                        "description": "Не найдено"
+                    },
+                    "422": {
+                        "description": "Валидация формы"
+                    },
+                    "429": {
+                        "description": "Бан запросов на 1 минуту"
+                    },
+                    "500": {
+                        "description": "Ошибка сервера"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": ""
+                    }
+                ]
+            }
+        },
         "/v1/profile/auth/code": {
             "post": {
                 "tags": [
@@ -168,7 +480,7 @@
                                         "data": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "#/components/schemas/v1.Profile.EmployeeResource"
+                                                "$ref": "#/components/schemas/v1.Profile.UserResource"
                                             }
                                         }
                                     },
@@ -228,7 +540,7 @@
                                         "data": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "#/components/schemas/v1.Profile.EmployeeResource"
+                                                "$ref": "#/components/schemas/v1.Profile.UserResource"
                                             }
                                         }
                                     },
@@ -258,13 +570,102 @@
                 }
             }
         },
+        "/v1/profile/auth/logout": {
+            "post": {
+                "tags": [
+                    "Аутентификация"
+                ],
+                "summary": "Запрос на выход из системы",
+                "operationId": "1719dce0e27ce363b87912d2681e4ee5",
+                "responses": {
+                    "200": {
+                        "description": ""
+                    },
+                    "401": {
+                        "description": "Не авторизован"
+                    },
+                    "403": {
+                        "description": "Контент не доступен"
+                    },
+                    "404": {
+                        "description": "Не найдено"
+                    },
+                    "422": {
+                        "description": "Валидация формы"
+                    },
+                    "429": {
+                        "description": "Бан запросов на 1 минуту"
+                    },
+                    "500": {
+                        "description": "Ошибка сервера"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": ""
+                    }
+                ]
+            }
+        },
+        "/v1/profile/employees": {
+            "get": {
+                "tags": [
+                    "Центральный пользователь"
+                ],
+                "summary": "Получение всех центральных пользователей системы",
+                "operationId": "66b2f9c1672a02712829e100a508004e",
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/v1.Profile.UserResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Не авторизован"
+                    },
+                    "403": {
+                        "description": "Контент не доступен"
+                    },
+                    "404": {
+                        "description": "Не найдено"
+                    },
+                    "422": {
+                        "description": "Валидация формы"
+                    },
+                    "429": {
+                        "description": "Бан запросов на 1 минуту"
+                    },
+                    "500": {
+                        "description": "Ошибка сервера"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": ""
+                    }
+                ]
+            }
+        },
         "/v1/profile/employees/{id}": {
             "get": {
                 "tags": [
-                    "Пользователь"
+                    "Центральный пользователь"
                 ],
-                "summary": "Получение информации о пользователе",
-                "operationId": "c79418e669d5ca1118c25aaf73bea6a9",
+                "summary": "Получение информации о центральном пользователе системы",
+                "operationId": "44eac244efb226398f962c3ef2687f9f",
                 "parameters": [
                     {
                         "name": "id",
@@ -283,7 +684,7 @@
                                         "data": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "#/components/schemas/v1.Profile.EmployeeResource"
+                                                "$ref": "#/components/schemas/v1.Profile.UserResource"
                                             }
                                         }
                                     },
@@ -319,10 +720,10 @@
             },
             "put": {
                 "tags": [
-                    "Пользователь"
+                    "Центральный пользователь"
                 ],
-                "summary": "Обновление информации о пользователе",
-                "operationId": "77ccf357d6eacb5de9b46f12fe3077de",
+                "summary": "Обновление информации о центральном пользователе системы",
+                "operationId": "ba1d72f04d1e8c9d3c02061080025617",
                 "parameters": [
                     {
                         "name": "id",
@@ -354,7 +755,7 @@
                                         "data": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "#/components/schemas/v1.Profile.EmployeeResource"
+                                                "$ref": "#/components/schemas/v1.Profile.UserResource"
                                             }
                                         }
                                     },
@@ -387,18 +788,39 @@
                         "bearerAuth": ""
                     }
                 ]
-            }
-        },
-        "/v1/profile/employee/logout": {
-            "post": {
+            },
+            "delete": {
                 "tags": [
-                    "Пользователь"
+                    "Центральный пользователь"
                 ],
-                "summary": "Запрос на выход из системы",
-                "operationId": "a1d225dd3a872c73169e8948526f40a9",
+                "summary": "Удаление центрального пользователя",
+                "operationId": "399fc27aae08585d1cfff1abe9fc6355",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID пользователя",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
-                        "description": ""
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/v1.Profile.UserResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     },
                     "401": {
                         "description": "Не авторизован"
@@ -471,8 +893,8 @@
                 },
                 "type": "object"
             },
-            "v1.Profile.EmployeeResource": {
-                "description": "Class EmployeeResource.",
+            "v1.Profile.UserResource": {
+                "description": "Class UserResource.",
                 "properties": {
                     "id": {
                         "description": "ID пользователя",
@@ -514,7 +936,10 @@
                 "type": "object"
             },
             "_CentralUser": {
-                "description": "App\\Models\\Employee"
+                "description": "App\\Models\\CentralUser"
+            },
+            "_Product": {
+                "description": "App\\Models\\Product"
             },
             "_TenantUser": {
                 "description": "App\\Models\\TenantUser"

@@ -33,7 +33,7 @@ class VerificationCode extends Model
         ColumnFillable;
 
     public function employee(){
-        $this->belongsTo(Employee::class, 'employee_id');
+        $this->belongsTo(CentralUser::class, 'central_user_id');
     }
 
 }
