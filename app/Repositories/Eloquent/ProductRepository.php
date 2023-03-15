@@ -2,24 +2,22 @@
 
 namespace App\Repositories\Eloquent;
 
-use App\Models\CentralUser;
-use App\Models\Employee;
-use App\Models\Tenant\User;
-use App\Repositories\UserRepositoryInterface;
+use App\Models\Tenant\Product;
+use App\Repositories\ProductRepositoryInterface;
 
 /**
  *
- * Class UserRepository.
+ * Class ProductRepository.
  *
- * @mixin \App\Models\Tenant\User
+ * @mixin \App\Models\Tenant\Product
  *
  */
-class UserRepository implements UserRepositoryInterface
+class ProductRepository implements ProductRepositoryInterface
 {
 
-    protected User $model;
+    protected Product $model;
 
-    public function __construct(User $model)
+    public function __construct(Product $model)
     {
         $this->model = $model;
     }
@@ -50,10 +48,11 @@ class UserRepository implements UserRepositoryInterface
 
         return $this
             ->model
-            ->firstOrCreate($attributes);
+            ->create($attributes);
     }
 
     public function update($attributes, $id, $load = []){
+
         $data = $this
             ->model
             ->findOrFail($id);

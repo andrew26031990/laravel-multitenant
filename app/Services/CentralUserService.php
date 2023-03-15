@@ -11,9 +11,9 @@ use App\Repositories\CentralUserRepositoryInterface;
 use App\Repositories\UserRepositoryInterface;
 
 /**
- * Class EmployeeService.
+ * Class CentralUserService.
  */
-class EmployeeService
+class CentralUserService
 {
     public CentralUserRepositoryInterface $employeeRepository;
 

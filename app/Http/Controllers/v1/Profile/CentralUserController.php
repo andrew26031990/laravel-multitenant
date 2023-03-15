@@ -3,16 +3,14 @@
 namespace App\Http\Controllers\v1\Profile;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\v1\Company\storeUserRequest;
-use App\Http\Requests\v1\Profile\updateEmployeeRequest;
+use App\Http\Requests\v1\Company\updateUserRequest;
 use App\Http\Resources\v1\Profile\UserResource;
-use App\Services\EmployeeService;
-use Illuminate\Http\Request;
+use App\Services\CentralUserService;
 
 class CentralUserController extends Controller
 {
-    public EmployeeService $employeeService;
-    public function __construct(EmployeeService $employeeService)
+    public CentralUserService $employeeService;
+    public function __construct(CentralUserService $employeeService)
     {
         $this->employeeService = $employeeService;
     }
@@ -22,7 +20,7 @@ class CentralUserController extends Controller
      *  @OA\Get(
      *   security={ {"bearerAuth" : ""}},
      *   tags={"Центральный пользователь"},
-     *   path="/v1/profile/employees",
+     *   path="/v1/profile/users",
      *   summary="Получение всех центральных пользователей системы",
      *   @OA\Response(
      *     response=200,
@@ -49,7 +47,7 @@ class CentralUserController extends Controller
      *  @OA\Get(
      *   security={ {"bearerAuth" : ""}},
      *   tags={"Центральный пользователь"},
-     *   path="/v1/profile/employees/{id}",
+     *   path="/v1/profile/users/{id}",
      *   summary="Получение информации о центральном пользователе системы",
      *   @OA\Parameter(
      *         name="id",
@@ -82,7 +80,7 @@ class CentralUserController extends Controller
      *  @OA\Put(
      *     security={ {"bearerAuth" : ""} },
      *   tags={"Центральный пользователь"},
-     *   path="/v1/profile/employees/{id}",
+     *   path="/v1/profile/users/{id}",
      *   summary="Обновление информации о центральном пользователе системы",
      *   @OA\Parameter(
      *         name="id",
@@ -117,7 +115,7 @@ class CentralUserController extends Controller
      * )
      */
 
-    public function update(updateEmployeeRequest $request, $id)
+    public function update(updateUserRequest $request, $id)
     {
         return new UserResource($this->employeeService->update($request->validated(), $id));
     }
@@ -127,7 +125,7 @@ class CentralUserController extends Controller
      *  @OA\Delete(
      *     security={ {"bearerAuth" : ""} },
      *   tags={"Центральный пользователь"},
-     *   path="/v1/profile/employees/{id}",
+     *   path="/v1/profile/users/{id}",
      *   summary="Удаление центрального пользователя",
      *   @OA\Parameter(
      *         name="id",
@@ -152,6 +150,6 @@ class CentralUserController extends Controller
      */
     public function destroy($id)
     {
-        return new UserResource($this->employeeService->destroy($id));
+        return $this->employeeService->destroy($id);
     }
 }

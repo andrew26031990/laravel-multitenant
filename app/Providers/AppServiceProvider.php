@@ -25,6 +25,16 @@ class AppServiceProvider extends ServiceProvider
             \App\Repositories\UserRepositoryInterface::class,
             \App\Repositories\Eloquent\UserRepository::class
         );
+
+        $this->app->bind(
+            \App\Repositories\ProductRepositoryInterface::class,
+            \App\Repositories\Eloquent\ProductRepository::class
+        );
+
+        if ($this->app->environment('local')) {
+            $this->app->register(\Laravel\Telescope\TelescopeServiceProvider::class);
+            $this->app->register(TelescopeServiceProvider::class);
+        }
     }
 
     /**

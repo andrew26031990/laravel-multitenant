@@ -6,13 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\v1\Profile\getCodeRequest;
 use App\Http\Requests\v1\Profile\verifyCodeRequest;
 use App\Http\Resources\v1\Profile\UserResource;
-use App\Services\EmployeeService;
+use App\Services\CentralUserService;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
-    public EmployeeService $employeeService;
-    public function __construct(EmployeeService $employeeService)
+    public CentralUserService $employeeService;
+    public function __construct(CentralUserService $employeeService)
     {
         $this->employeeService = $employeeService;
     }

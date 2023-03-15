@@ -194,7 +194,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        App\Providers\TelescopeServiceProvider::class,
+        //App\Providers\TelescopeServiceProvider::class, //removed
         // Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         App\Providers\TenancyServiceProvider::class,
         Laravel\Telescope\TelescopeServiceProvider::class,

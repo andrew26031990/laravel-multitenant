@@ -28,7 +28,7 @@ class UserService
     }
 
     public function update($attributes, $id, $load = [], $associate = []){
-        return $this->user->update($id, $attributes, $load, $associate);
+        return $this->user->update($attributes, $id, $load, $associate);
     }
 
     public function destroy($id){

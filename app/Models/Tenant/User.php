@@ -7,7 +7,9 @@ use App\Models\CentralUser;
 use App\Models\Tenant;
 use App\Models\Test;
 use App\Models\VerificationCode;
+use App\Traits\ColumnFillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
@@ -19,7 +21,7 @@ class User extends Authenticatable implements Syncable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    use ResourceSyncing;
+    use ResourceSyncing, SoftDeletes, ColumnFillable;
 
     //protected $connection = 'pgsql';
     protected $guarded = [];
@@ -34,13 +36,13 @@ class User extends Authenticatable implements Syncable
      *
      * @var array
      */
-    protected $fillable = [
+    /*protected $fillable = [
         'id',
         'phone',
         'first_name',
         'last_name',
         'is_active',
-    ];
+    ];*/
 
     /**
      * The attributes that should be hidden for arrays.

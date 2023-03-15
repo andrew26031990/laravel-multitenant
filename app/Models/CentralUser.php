@@ -6,6 +6,7 @@ use App\Models\Tenant\User;
 use App\Traits\ColumnFillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 use Stancl\Tenancy\Contracts\SyncMaster;
@@ -40,17 +41,17 @@ class CentralUser extends Authenticatable implements SyncMaster
         Notifiable,
         //InteractsWithMedia,
         //Translatable,
-        //SoftDeletes,
+        SoftDeletes,
         ColumnFillable,
         ResourceSyncing, CentralConnection;
 
     protected $guarded = [];
-    protected $fillable = [
+    /*protected $fillable = [
         'phone',
         'first_name',
         'last_name',
         'is_active',
-    ];
+    ];*/
 
     //protected $connection = 'pgsql';
     public $keyType = 'string';

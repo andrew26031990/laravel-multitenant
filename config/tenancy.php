@@ -8,7 +8,6 @@ use Stancl\Tenancy\Database\Models\Domain;
 return [
     'tenant_model' => \App\Models\Tenant::class,
     'id_generator' => Stancl\Tenancy\UUIDGenerator::class,
-    //'id_generator' => null,
 
     'domain_model' => Domain::class,
 
@@ -17,11 +16,13 @@ return [
      *
      * Only relevant if you're using the domain or subdomain identification middleware.
      */
-    'central_domains' => [
+    /*'central_domains' => [
         '127.0.0.1',
         '127.0.0.1:8000',
         'localhost',
-    ],
+    ],*/
+
+    'central_domain' => env('DOMAIN'),
 
     'drivers' => [
         'auto' => [

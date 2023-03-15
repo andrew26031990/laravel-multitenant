@@ -36,7 +36,8 @@ class TenantService
 
     public function store($attributes){
         $tenant = auth()->user()->tenants()->create($attributes);
-        $tenant->domains()->create(['domain' => $tenant->slug.'.'.config('tenancy.central_domains')[2]]);
+        //$tenant->domains()->create(['domain' => $tenant->slug.'.'.config('tenancy.central_domains')[2]]);
+        $tenant->domains()->create(['domain' => $tenant->slug.'.'.config('tenancy.central_domain')]);
         return $tenant->load('domains');
     }
 

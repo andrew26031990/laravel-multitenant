@@ -28,6 +28,310 @@
         }
     ],
     "paths": {
+        "/v1/company/products": {
+            "get": {
+                "tags": [
+                    "Товар компании"
+                ],
+                "summary": "Получение всех товаров компании",
+                "operationId": "001550709caee2e19116a7965751af97",
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/v1.Company.ProductResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Не авторизован"
+                    },
+                    "403": {
+                        "description": "Контент не доступен"
+                    },
+                    "404": {
+                        "description": "Не найдено"
+                    },
+                    "422": {
+                        "description": "Валидация формы"
+                    },
+                    "429": {
+                        "description": "Бан запросов на 1 минуту"
+                    },
+                    "500": {
+                        "description": "Ошибка сервера"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": ""
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Товар компании"
+                ],
+                "summary": "Добавление товара в компанию",
+                "operationId": "cfcc97449d453e2e0511f1f02622d264",
+                "requestBody": {
+                    "description": "Тело запроса на добавление товара в компанию",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {},
+                            "example": {
+                                "name": "Груша",
+                                "barcode": "123456789"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/v1.Company.ProductResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Не авторизован"
+                    },
+                    "403": {
+                        "description": "Контент не доступен"
+                    },
+                    "404": {
+                        "description": "Не найдено"
+                    },
+                    "422": {
+                        "description": "Валидация формы"
+                    },
+                    "429": {
+                        "description": "Бан запросов на 1 минуту"
+                    },
+                    "500": {
+                        "description": "Ошибка сервера"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": ""
+                    }
+                ]
+            }
+        },
+        "/v1/company/products/{id}": {
+            "get": {
+                "tags": [
+                    "Товар компании"
+                ],
+                "summary": "Просмотр товара в компании",
+                "operationId": "bd2e09a90d0df58b71989dd12c799783",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID товара",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/v1.Company.ProductResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Не авторизован"
+                    },
+                    "403": {
+                        "description": "Контент не доступен"
+                    },
+                    "404": {
+                        "description": "Не найдено"
+                    },
+                    "422": {
+                        "description": "Валидация формы"
+                    },
+                    "429": {
+                        "description": "Бан запросов на 1 минуту"
+                    },
+                    "500": {
+                        "description": "Ошибка сервера"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": ""
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Товар компании"
+                ],
+                "summary": "Редактирование товара в компании",
+                "operationId": "3e78a8a720b30699428aa36244294b66",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID товара",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "description": "Тело запроса на редактирование товара в компании",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {},
+                            "example": {
+                                "name": "Яблоко",
+                                "barcode": "987654321"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/v1.Company.ProductResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Не авторизован"
+                    },
+                    "403": {
+                        "description": "Контент не доступен"
+                    },
+                    "404": {
+                        "description": "Не найдено"
+                    },
+                    "422": {
+                        "description": "Валидация формы"
+                    },
+                    "429": {
+                        "description": "Бан запросов на 1 минуту"
+                    },
+                    "500": {
+                        "description": "Ошибка сервера"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": ""
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Товар компании"
+                ],
+                "summary": "Удаление товара из компании",
+                "operationId": "6beaaf57cf4eb00fb34280f2cbad377d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID товара",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/v1.Company.ProductResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Не авторизован"
+                    },
+                    "403": {
+                        "description": "Контент не доступен"
+                    },
+                    "404": {
+                        "description": "Не найдено"
+                    },
+                    "422": {
+                        "description": "Валидация формы"
+                    },
+                    "429": {
+                        "description": "Бан запросов на 1 минуту"
+                    },
+                    "500": {
+                        "description": "Ошибка сервера"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": ""
+                    }
+                ]
+            }
+        },
         "/v1/company/tenants": {
             "get": {
                 "tags": [
@@ -148,13 +452,13 @@
                 ]
             }
         },
-        "/v1/tenant/users": {
+        "/v1/company/users": {
             "get": {
                 "tags": [
                     "Пользователь компании"
                 ],
                 "summary": "Получение всех пользователей компании",
-                "operationId": "6c54834ffa632478b688f87b37f25c66",
+                "operationId": "62dd0a55e9514121666ed69f1512611d",
                 "responses": {
                     "200": {
                         "description": "",
@@ -204,7 +508,7 @@
                     "Пользователь компании"
                 ],
                 "summary": "Добавление пользователя в компанию",
-                "operationId": "53b30e6e162189f76f7c86bc87a13d75",
+                "operationId": "c4d789a7d7f3c70fe5a140ed6f3c8522",
                 "requestBody": {
                     "description": "Тело запроса на добавление пользователя в компанию",
                     "required": true,
@@ -262,13 +566,13 @@
                 ]
             }
         },
-        "/v1/tenant/users/{id}": {
+        "/v1/company/users/{id}": {
             "get": {
                 "tags": [
                     "Пользователь компании"
                 ],
                 "summary": "Получение информации о пользователе в компании",
-                "operationId": "db0a54e9680b7d14f57552ee02448103",
+                "operationId": "f1cc8b7f0b2ac66f6030d32ad05076ad",
                 "parameters": [
                     {
                         "name": "id",
@@ -326,7 +630,7 @@
                     "Пользователь компании"
                 ],
                 "summary": "Обновление информации о пользователе компании",
-                "operationId": "864e9e3aa5591628e87885e95bc65304",
+                "operationId": "0ba4700ced2f44cac10a4fc8c7724696",
                 "parameters": [
                     {
                         "name": "id",
@@ -397,7 +701,7 @@
                     "Пользователь компании"
                 ],
                 "summary": "Удаление пользователя из компании",
-                "operationId": "0bfdcc93d1dc34dd6cb9e7e24d2b3f60",
+                "operationId": "9ef0429bc6ff08908c047a7d81f78732",
                 "parameters": [
                     {
                         "name": "id",
@@ -607,13 +911,13 @@
                 ]
             }
         },
-        "/v1/profile/employees": {
+        "/v1/profile/users": {
             "get": {
                 "tags": [
                     "Центральный пользователь"
                 ],
                 "summary": "Получение всех центральных пользователей системы",
-                "operationId": "66b2f9c1672a02712829e100a508004e",
+                "operationId": "ff717a96033dab36fb91d1460a2432f8",
                 "responses": {
                     "200": {
                         "description": "",
@@ -659,13 +963,13 @@
                 ]
             }
         },
-        "/v1/profile/employees/{id}": {
+        "/v1/profile/users/{id}": {
             "get": {
                 "tags": [
                     "Центральный пользователь"
                 ],
                 "summary": "Получение информации о центральном пользователе системы",
-                "operationId": "44eac244efb226398f962c3ef2687f9f",
+                "operationId": "10fc2b60117edf435e837bcd8cb4cfd0",
                 "parameters": [
                     {
                         "name": "id",
@@ -723,7 +1027,7 @@
                     "Центральный пользователь"
                 ],
                 "summary": "Обновление информации о центральном пользователе системы",
-                "operationId": "ba1d72f04d1e8c9d3c02061080025617",
+                "operationId": "409d3a199f1967b1790659be5d1099be",
                 "parameters": [
                     {
                         "name": "id",
@@ -794,7 +1098,7 @@
                     "Центральный пользователь"
                 ],
                 "summary": "Удаление центрального пользователя",
-                "operationId": "399fc27aae08585d1cfff1abe9fc6355",
+                "operationId": "78ac17e1766a17b95af3ddd027f669dd",
                 "parameters": [
                     {
                         "name": "id",
@@ -867,6 +1171,7 @@
                 },
                 "type": "object"
             },
+            "v1.Company.ProductResource": {},
             "v1.Company.TenantResource": {
                 "description": "Class TenantResource.",
                 "properties": {

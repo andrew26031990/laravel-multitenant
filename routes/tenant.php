@@ -29,14 +29,11 @@ Route::middleware([
         function () {
             Route::group(
                 [
-                    'prefix' => 'tenant',
+                    'prefix' => 'company',
                 ],
                 function () {
                     Route::apiResource('products', \App\Http\Controllers\v1\Company\ProductController::class);
                     Route::apiResource('users', \App\Http\Controllers\v1\Company\UserController::class);
-                    Route::get('/employees', function (){
-                        return \App\Models\Tenant\User::all();
-                    });
                 });
             Route::group(
                 [

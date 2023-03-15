@@ -4,6 +4,7 @@ namespace App\Http\Controllers\v1\Company;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\v1\Company\storeUserRequest;
+use App\Http\Requests\v1\Company\updateUserRequest;
 use App\Http\Resources\v1\Profile\UserResource;
 use App\Services\UserService;
 use Illuminate\Http\Request;
@@ -22,7 +23,7 @@ class UserController extends Controller
      *  @OA\Get(
      *   security={ {"bearerAuth" : ""}},
      *   tags={"Пользователь компании"},
-     *   path="/v1/tenant/users",
+     *   path="/v1/company/users",
      *   summary="Получение всех пользователей компании",
      *   @OA\Response(
      *     response=200,
@@ -49,7 +50,7 @@ class UserController extends Controller
      *  @OA\Post(
      *   security={ {"bearerAuth" : ""}},
      *   tags={"Пользователь компании"},
-     *   path="/v1/tenant/users",
+     *   path="/v1/company/users",
      *   summary="Добавление пользователя в компанию",
      *     @OA\RequestBody(
      *      required=true,
@@ -78,7 +79,7 @@ class UserController extends Controller
      */
     public function store(storeUserRequest $request)
     {
-        return new UserResource($this->userService->store($request));
+        return new UserResource($this->userService->store($request->validated()));
     }
 
     /**
@@ -86,7 +87,7 @@ class UserController extends Controller
      *  @OA\Get(
      *   security={ {"bearerAuth" : ""}},
      *   tags={"Пользователь компании"},
-     *   path="/v1/tenant/users/{id}",
+     *   path="/v1/company/users/{id}",
      *   summary="Получение информации о пользователе в компании",
      *   @OA\Parameter(
      *         name="id",
@@ -119,7 +120,7 @@ class UserController extends Controller
      *  @OA\Put(
      *     security={ {"bearerAuth" : ""} },
      *   tags={"Пользователь компании"},
-     *   path="/v1/tenant/users/{id}",
+     *   path="/v1/company/users/{id}",
      *   summary="Обновление информации о пользователе компании",
      *   @OA\Parameter(
      *         name="id",
@@ -153,9 +154,9 @@ class UserController extends Controller
      *   @OA\Response(response=500, description="Ошибка сервера")
      * )
      */
-    public function update(Request $request, $id)
+    public function update(updateUserRequest $request, $id)
     {
-        return new UserResource($this->userService->update($request, $id));
+        return new UserResource($this->userService->update($request->validated(), $id));
     }
 
     /**
@@ -163,7 +164,7 @@ class UserController extends Controller
      *  @OA\Delete(
      *     security={ {"bearerAuth" : ""} },
      *   tags={"Пользователь компании"},
-     *   path="/v1/tenant/users/{id}",
+     *   path="/v1/company/users/{id}",
      *   summary="Удаление пользователя из компании",
      *   @OA\Parameter(
      *         name="id",
