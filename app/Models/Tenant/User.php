@@ -21,7 +21,7 @@ class User extends Authenticatable implements Syncable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    use ResourceSyncing, SoftDeletes, ColumnFillable;
+    use ResourceSyncing, ColumnFillable;
 
     //protected $connection = 'pgsql';
     protected $guarded = [];

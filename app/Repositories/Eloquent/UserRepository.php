@@ -64,7 +64,6 @@ class UserRepository implements UserRepositoryInterface
     }
 
     public function destroy($id){
-
         return $this
             ->model
             ->findOrFail($id)

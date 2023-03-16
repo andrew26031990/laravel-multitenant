@@ -189,6 +189,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        return new UserResource($this->userService->destroy($id));
+        return $this->userService->destroy($id);
     }
 }

@@ -41,7 +41,6 @@ class CentralUser extends Authenticatable implements SyncMaster
         Notifiable,
         //InteractsWithMedia,
         //Translatable,
-        SoftDeletes,
         ColumnFillable,
         ResourceSyncing, CentralConnection;
 
