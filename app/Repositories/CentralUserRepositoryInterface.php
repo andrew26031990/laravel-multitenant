@@ -18,7 +18,5 @@ interface CentralUserRepositoryInterface
 
     public function verifyOtp($request);
 
-    public function logout();
-
     public function invite($attributes, $tenant, $load = []);
 }

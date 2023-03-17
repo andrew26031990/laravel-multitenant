@@ -43,14 +43,8 @@ class CentralUserService
         return $this->employeeRepository->destroy($id);
     }
 
-    /**
-     * @throws EmployeeInactiveException
-     */
     public function sendOtp($request){
         $employee = $this->employeeRepository->store($request);
-        /*if(!$employee->is_active){
-            throw new EmployeeInactiveException('Account has been blocked');
-        }*/
         $this->employeeRepository->sendOtp($employee);
         return $employee;
     }
@@ -59,14 +53,8 @@ class CentralUserService
         return $this->employeeRepository->verifyOtp($request);
     }
 
-    /**
-     * @throws \Exception
-     */
     public function logout(){
-        $loggedOut = $this->employeeRepository->logout();
-        if(!$loggedOut){
-            throw new LogOutException(__('Unable to log out'));
-        }
+        auth('api')->user()->token()->revoke();
         return __('Logged out');
     }
 }

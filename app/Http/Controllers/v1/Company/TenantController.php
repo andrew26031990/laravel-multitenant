@@ -113,6 +113,6 @@ class TenantController extends Controller
      */
     public function destroy($id)
     {
-        return $this->tenantService->destroy($id);
+        //
     }
 }

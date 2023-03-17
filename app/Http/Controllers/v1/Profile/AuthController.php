@@ -11,10 +11,10 @@ use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
-    public CentralUserService $employeeService;
-    public function __construct(CentralUserService $employeeService)
+    public CentralUserService $centralUserService;
+    public function __construct(CentralUserService $centralUserService)
     {
-        $this->employeeService = $employeeService;
+        $this->centralUserService = $centralUserService;
     }
 
     /**
@@ -50,7 +50,7 @@ class AuthController extends Controller
      */
     public function getCode(getCodeRequest $request)
     {
-        return new UserResource($this->employeeService->sendOtp($request->validated()));
+        return new UserResource($this->centralUserService->sendOtp($request->validated()));
     }
 
     /**
@@ -87,12 +87,12 @@ class AuthController extends Controller
      */
     public function verifyCode(verifyCodeRequest $request)
     {
-        return new UserResource($this->employeeService->verifyOtp($request->validated()));
+        return new UserResource($this->centralUserService->verifyOtp($request->validated()));
     }
 
     /**
      *
-     *  @OA\Post(
+     * @OA\Post(
      *     security={ {"bearerAuth" : ""} },
      *   tags={"Аутентификация"},
      *   path="/v1/profile/auth/logout",
@@ -108,8 +108,9 @@ class AuthController extends Controller
      *   @OA\Response(response=429, description="Бан запросов на 1 минуту"),
      *   @OA\Response(response=500, description="Ошибка сервера")
      * )
+     * @throws \Exception
      */
     public function logout(){
-        return $this->employeeService->logout();
+        return $this->centralUserService->logout();
     }
 }

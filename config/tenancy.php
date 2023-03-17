@@ -22,7 +22,7 @@ return [
         'localhost',
     ],*/
 
-    'central_domain' => env('DOMAIN'),
+    'central_domain' => env('DOMAIN', 'localhost'),
 
     'drivers' => [
         'auto' => [

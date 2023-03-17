@@ -29,7 +29,6 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * App\Models\CentralUser
  * @OA\Schema (schema="_CentralUser")
  */
-
 class CentralUser extends Authenticatable implements SyncMaster
     //implements
     //HasMedia
@@ -58,6 +57,7 @@ class CentralUser extends Authenticatable implements SyncMaster
 
     public $timestamps = false;
     public $table = 'users';
+
 //    public $incrementing = false;
 
 

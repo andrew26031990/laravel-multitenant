@@ -23,7 +23,7 @@ class ProductController extends Controller
      *
      *  @OA\Get(
      *   security={ {"bearerAuth" : ""}},
-     *   tags={"Товар компании"},
+     *   tags={"Товары компании"},
      *   path="/v1/company/products",
      *   summary="Получение всех товаров компании",
      *   @OA\Response(
@@ -50,7 +50,7 @@ class ProductController extends Controller
      *
      *  @OA\Post(
      *   security={ {"bearerAuth" : ""}},
-     *   tags={"Товар компании"},
+     *   tags={"Товары компании"},
      *   path="/v1/company/products",
      *   summary="Добавление товара в компанию",
      *     @OA\RequestBody(
@@ -88,7 +88,7 @@ class ProductController extends Controller
      *
      *  @OA\Get(
      *   security={ {"bearerAuth" : ""}},
-     *   tags={"Товар компании"},
+     *   tags={"Товары компании"},
      *   path="/v1/company/products/{id}",
      *   summary="Просмотр товара в компании",
      *     @OA\Parameter(
@@ -121,7 +121,7 @@ class ProductController extends Controller
      *
      *  @OA\Put(
      *   security={ {"bearerAuth" : ""}},
-     *   tags={"Товар компании"},
+     *   tags={"Товары компании"},
      *   path="/v1/company/products/{id}",
      *   summary="Редактирование товара в компании",
      *     @OA\Parameter(
@@ -165,7 +165,7 @@ class ProductController extends Controller
      *
      *  @OA\Delete(
      *     security={ {"bearerAuth" : ""} },
-     *   tags={"Товар компании"},
+     *   tags={"Товары компании"},
      *   path="/v1/company/products/{id}",
      *   summary="Удаление товара из компании",
      *   @OA\Parameter(

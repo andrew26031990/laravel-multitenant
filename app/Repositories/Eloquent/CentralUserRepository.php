@@ -5,6 +5,7 @@ namespace App\Repositories\Eloquent;
 use App\Models\CentralUser;
 use App\Repositories\CentralUserRepositoryInterface;
 use Illuminate\Support\Facades\DB;
+use Laravel\Passport\Passport;
 
 /**
  *
@@ -81,11 +82,6 @@ class CentralUserRepository implements CentralUserRepositoryInterface
         $employee = $this->model->wherePhone($request['phone'])->first();
         $employee->access = $employee->createToken('token');
         return $employee;
-    }
-
-    public function logout()
-    {
-        return auth()->user()->token()->revoke();
     }
 
     public function invite($attributes, $tenant, $load = [])

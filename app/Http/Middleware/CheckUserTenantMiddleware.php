@@ -22,7 +22,12 @@ class CheckUserTenantMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        $tenant = Tenant::whereSlug(explode('.', $_SERVER['HTTP_HOST'])[0])->first();
+        $host = explode('.', $_SERVER['HTTP_HOST'])[0];
+        if($host == 'api'){
+            $host = explode('.', $_SERVER['HTTP_HOST'])[1];
+        }
+
+        $tenant = Tenant::whereSlug($host)->first();
         if(!$tenant){
             throw new CompanyNotFoundException(__('Company not found'));
         }
@@ -30,7 +35,7 @@ class CheckUserTenantMiddleware
         tenancy()->initialize($tenant);
 
         if(!$tenant->users->contains('id', auth()->user()->getAuthIdentifier())){
-            throw new UserNotBelongsToCompanyException(__('User not belongs to Company'));
+            throw new UserNotBelongsToCompanyException(__('Access denied'));
         }
 
         return $next($request);
