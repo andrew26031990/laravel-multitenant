@@ -57,4 +57,10 @@ class CentralUserService
         auth('api')->user()->token()->revoke();
         return __('Logged out');
     }
+
+    public function refreshToken(){
+        $employee = auth('api')->user();
+        $employee->access = $employee->createToken('token');
+        return $employee;
+    }
 }

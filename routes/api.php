@@ -23,6 +23,7 @@ Route::group(
                         Route::post('code', [\App\Http\Controllers\v1\Profile\AuthController::class, 'getCode']);
                         Route::post('verify', [\App\Http\Controllers\v1\Profile\AuthController::class, 'verifyCode']);
                         Route::post('logout', [\App\Http\Controllers\v1\Profile\AuthController::class, 'logout'])->middleware('auth:api');
+                        Route::post('token/refresh', [\App\Http\Controllers\v1\Profile\AuthController::class, 'refreshToken'])->middleware('auth:api');
                 });
                 Route::group(
                     [

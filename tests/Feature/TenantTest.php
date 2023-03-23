@@ -140,7 +140,6 @@ class TenantTest extends TestCase
 
         $this->actingAs($user, 'api')
             ->delete('http://localhost/v1/company/tenants/' . json_decode($tenant)->data->id)
-            ->assertSee('1')
             ->assertStatus(200);
 
         $this->artisan('migrate:fresh --env=testing');

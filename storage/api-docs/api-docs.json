@@ -852,6 +852,43 @@
                     }
                 ]
             }
+        },
+        "/v1/profile/auth/token/refresh": {
+            "post": {
+                "tags": [
+                    "Аутентификация"
+                ],
+                "summary": "Запрос на обновление токена",
+                "operationId": "f82611bc1c43df93e23cd64511c4fc28",
+                "responses": {
+                    "200": {
+                        "description": ""
+                    },
+                    "401": {
+                        "description": "Не авторизован"
+                    },
+                    "403": {
+                        "description": "Контент не доступен"
+                    },
+                    "404": {
+                        "description": "Не найдено"
+                    },
+                    "422": {
+                        "description": "Валидация формы"
+                    },
+                    "429": {
+                        "description": "Бан запросов на 1 минуту"
+                    },
+                    "500": {
+                        "description": "Ошибка сервера"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": ""
+                    }
+                ]
+            }
         }
     },
     "components": {
