@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
  */
-class ProductFactory extends Factory
+class VariantFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,7 +18,8 @@ class ProductFactory extends Factory
     {
         return [
             'name' => $this->faker->name,
-            'vendor_code' => (string)random_int(100000, 999999)
+            'modification' => $this->faker->sentence,
+            'barcode' => $this->faker->postcode
         ];
     }
 }

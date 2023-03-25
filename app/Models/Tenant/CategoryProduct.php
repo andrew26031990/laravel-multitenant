@@ -21,31 +21,18 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @OA\Schema (schema="_Product")
  */
 
-class Product extends Model
+class CategoryProduct extends Model
     //implements
     //HasMedia
     //TranslatableContract
 {
     use
-        HasFactory,
         //InteractsWithMedia,
         //Translatable,
         SoftDeletes,
         ColumnFillable;
 
-    public $table = 'products';
-
-    public function brand(){
-        return $this->belongsTo(Brand::class);
-    }
-
-    public function variants(){
-        return $this->hasMany(Variant::class);
-    }
-
-    public function categories(){
-        return $this->belongsToMany(Category::class);
-    }
+    public $table = 'category_product';
 
     //protected $connection = 'pgsql';
 

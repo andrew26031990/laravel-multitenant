@@ -14,9 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tenant_users', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('tenant_id');
-            $table->string('user_id');
+            $table->increments('id')->comment('ID сущности');
+            $table->string('tenant_id')->comment('Компания');
+            $table->string('user_id')->comment('Пользователь');
 
             $table->unique(['tenant_id', 'user_id']);
 

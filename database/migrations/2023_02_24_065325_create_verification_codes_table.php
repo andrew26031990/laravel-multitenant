@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('verification_codes', function (Blueprint $table) {
             $table->id()->comment('ID сущности');
-            $table->string('otp');
-            $table->timestamp('expired_at');
+            $table->string('otp')->comment('OTP код');
+            $table->timestamp('expired_at')->comment('Срок жизни OTP кода');
             //$table->bigInteger('user_id')->unsigned();
-            $table->string('central_user_id');
+            $table->string('central_user_id')->comment('Пользователь OTP');
             //$table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
             $table->foreign('central_user_id')->references('id')->on('users')->cascadeOnDelete();
             $table->timestamps();

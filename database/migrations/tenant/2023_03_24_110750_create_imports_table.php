@@ -13,12 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('imports', function (Blueprint $table) {
             $table->id()->comment('ID сущности');
-            $table->string('name')->comment('Наименование товара');
-            $table->string('vendor_code')->nullable()->comment('Артикул');
-            $table->boolean('is_active')->default(true)->comment('Статус');
-            $table->foreignId('brand_id')->comment('Название бренда');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -31,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('imports');
     }
 };

@@ -16,16 +16,16 @@ class CreateTenantsTable extends Migration
     public function up(): void
     {
         Schema::create('tenants', function (Blueprint $table) {
-            $table->string('id')->primary();
+            $table->string('id')->primary()->comment('ID сущности');;
 
             // your custom columns may go here
-            $table->string('name');
-            $table->string('slug')->unique();
+            $table->string('name')->comment('Название компании');
+            $table->string('slug')->unique()->comment('URL компании');
             //$table->string('plan');
             // your custom columns may go here
 
             $table->timestamps();
-            $table->json('data')->nullable();
+            $table->json('data')->nullable()->comment('Данные компании (по умолчанию имя базы данных)');
         });
     }
 
