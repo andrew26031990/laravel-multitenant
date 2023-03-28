@@ -16,6 +16,14 @@ Route::group(
     function () {
         Route::group(
             [
+                'prefix' => 'company',
+                'middleware' => 'auth:api'
+            ],
+            function () {
+                Route::apiResource('tenants', \App\Http\Controllers\v1\Company\TenantController::class);
+            });
+        Route::group(
+            [
                 'prefix' => 'profile'
             ],
             function () {
@@ -36,19 +44,11 @@ Route::group(
                     Route::apiResource('users', \App\Http\Controllers\v1\Profile\CentralUserController::class);
                 });
         });
-        Route::group(
-            [
-                'prefix' => 'company',
-                'middleware' => 'auth:api'
-            ],
-            function () {
-                Route::apiResource('tenants', \App\Http\Controllers\v1\Company\TenantController::class);
-            });
     }
 );
 
 Route::get('openai', function (){
-    /*$result = OpenAI::completions()->create([
+    $result = OpenAI::completions()->create([
         'model' => 'text-davinci-003',
         'prompt' => 'What is the universe?',
         'max_tokens' => 10,
@@ -56,41 +56,6 @@ Route::get('openai', function (){
 
     return response()->json([
         'data' => $result
-    ]);*/
-});
-
-Route::get('openai2', function (){
-    $open_ai_key = getenv('OPENAI_API_KEY');
-    $open_ai = new \Orhanerday\OpenAi\OpenAi($open_ai_key);
-
-    $complete = $open_ai->chat([
-        'model' => 'gpt-3.5-turbo',
-        'messages' => [
-            /*[
-                "role" => "system",
-                "content" => "You are a helpful assistant."
-            ],
-            [
-                "role" => "user",
-                "content" => "Who won the world series in 2020?"
-            ],
-            [
-                "role" => "assistant",
-                "content" => "The Los Angeles Dodgers won the World Series in 2020."
-            ],*/
-            [
-                "role" => "user",
-                "content" => "How to generate laravel model"
-            ],
-        ],
-        'temperature' => 1.0,
-        'max_tokens' => 4000,
-        'frequency_penalty' => 0,
-        'presence_penalty' => 0,
-    ]);
-
-    return response()->json([
-        'data' => json_decode($complete, true)
     ]);
 });
 

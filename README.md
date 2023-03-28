@@ -7,7 +7,7 @@ alias sail='[ -f sail ] && sh sail || sh vendor/bin/sail'
 
 sail up
 
-sail artisan make:migration create_tests_table --create=tests --path=database/migrations/tenant
+sail artisan make:migration create_tests_table --path=database/migrations/tenant
 
 sail artisan tenants:migrate 
 

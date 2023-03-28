@@ -17,8 +17,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 //use Astrotomic\Translatable\Translatable;
 
 /**
- * App\Models\Product
- * @OA\Schema (schema="_Product")
+ * App\Models\Variant
+ * @OA\Schema (schema="_Variant")
  */
 
 class Variant extends Model

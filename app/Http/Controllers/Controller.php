@@ -69,8 +69,13 @@ use Illuminate\Routing\Controller as BaseController;
  *     description="API LOCAL SERVER"
  * )
  * @OA\Server(
- *      url="http://{tenant}.localhost",
+ *      url="{schema}://{tenant}.localhost",
  *      description="API LOCAL SERVER WITH TENANT",
+ *     @OA\ServerVariable(
+ *          serverVariable="schema",
+ *          enum={"https", "http"},
+ *          default="http"
+ *      ),
  *      @OA\ServerVariable(
  *          serverVariable="tenant",
  *          default="tenant"

@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
             )
             ->create();
 
-        //Создание доменов к тенантам (компаниям)
+        //Создание доменов к тенантам (компаниям) и их наполнение
         Tenant::all()->runForEach(function ($tenant) {
             $tenant->domains()->create(['domain' => $tenant->slug.'.'.getenv('DOMAIN', 'localhost')]);
 

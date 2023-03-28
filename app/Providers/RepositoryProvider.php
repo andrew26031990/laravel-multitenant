@@ -35,6 +35,11 @@ class RepositoryProvider extends ServiceProvider
             \App\Repositories\Eloquent\TenantRepository::class
         );
 
+        $this->app->bind(
+            \App\Repositories\CategoryRepositoryInterface::class,
+            \App\Repositories\Eloquent\CategoryRepository::class
+        );
+
     }
 
     /**

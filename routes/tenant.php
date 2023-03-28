@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Http\Middleware\InitializeTenancyByDomain;
 use Illuminate\Support\Facades\Route;
+use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware([
     'auth:api', 'employee',
     InitializeTenancyByDomain::class,
-    //PreventAccessFromCentralDomains::class,
+    PreventAccessFromCentralDomains::class,
 ])->group(function () {
     Route::group(
         [
@@ -34,6 +35,10 @@ Route::middleware([
                 function () {
                     Route::apiResource('products', \App\Http\Controllers\v1\Company\ProductController::class);
                     Route::apiResource('users', \App\Http\Controllers\v1\Company\UserController::class);
+                    Route::apiResource('categories', \App\Http\Controllers\v1\Company\CategoryController::class);
+                    Route::controller(\App\Http\Controllers\v1\Company\CategoryController::class)->group(function () {
+                        Route::get('category/{id}/products', 'products');
+                    });
                 });
             Route::group(
                 [

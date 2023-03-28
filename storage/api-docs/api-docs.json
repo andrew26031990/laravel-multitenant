@@ -14,9 +14,16 @@
             "description": "API LOCAL SERVER"
         },
         {
-            "url": "http://{tenant}.localhost",
+            "url": "{schema}://{tenant}.localhost",
             "description": "API LOCAL SERVER WITH TENANT",
             "variables": {
+                "schema": {
+                    "enum": [
+                        "https",
+                        "http"
+                    ],
+                    "default": "http"
+                },
                 "tenant": {
                     "default": "tenant"
                 }
@@ -28,6 +35,368 @@
         }
     ],
     "paths": {
+        "/v1/company/categories": {
+            "get": {
+                "tags": [
+                    "Категории компании"
+                ],
+                "summary": "Получение всех категорий компании",
+                "operationId": "ee0cf9d0e880bba4c2d6bcbe0c3b8e6a",
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/v1.Company.CategoryResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Не авторизован"
+                    },
+                    "403": {
+                        "description": "Контент не доступен"
+                    },
+                    "404": {
+                        "description": "Не найдено"
+                    },
+                    "422": {
+                        "description": "Валидация формы"
+                    },
+                    "429": {
+                        "description": "Бан запросов на 1 минуту"
+                    },
+                    "500": {
+                        "description": "Ошибка сервера"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": ""
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Категории компании"
+                ],
+                "summary": "Добавление категории в компанию",
+                "operationId": "ff77ff04b8b8f5e60f70e27bf2a7cbc1",
+                "requestBody": {
+                    "description": "Тело запроса на добавление категории в компанию",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {},
+                            "example": {
+                                "name": "Категория 1"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/v1.Company.CategoryResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Не авторизован"
+                    },
+                    "403": {
+                        "description": "Контент не доступен"
+                    },
+                    "404": {
+                        "description": "Не найдено"
+                    },
+                    "422": {
+                        "description": "Валидация формы"
+                    },
+                    "429": {
+                        "description": "Бан запросов на 1 минуту"
+                    },
+                    "500": {
+                        "description": "Ошибка сервера"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": ""
+                    }
+                ]
+            }
+        },
+        "/v1/company/categories/{id}": {
+            "get": {
+                "tags": [
+                    "Категории компании"
+                ],
+                "summary": "Получение всех категорий компании",
+                "operationId": "763e765102fc90d73b418dff618c548d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID категории",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/v1.Company.CategoryResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Не авторизован"
+                    },
+                    "403": {
+                        "description": "Контент не доступен"
+                    },
+                    "404": {
+                        "description": "Не найдено"
+                    },
+                    "422": {
+                        "description": "Валидация формы"
+                    },
+                    "429": {
+                        "description": "Бан запросов на 1 минуту"
+                    },
+                    "500": {
+                        "description": "Ошибка сервера"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": ""
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Категории компании"
+                ],
+                "summary": "Редактирование категории в компании",
+                "operationId": "0d5db2a69583df391b36460bc96ad16c",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID категории",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "description": "Тело запроса на редактирование категории в компании",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {},
+                            "example": {
+                                "name": "Категория 2"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/v1.Company.CategoryResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Не авторизован"
+                    },
+                    "403": {
+                        "description": "Контент не доступен"
+                    },
+                    "404": {
+                        "description": "Не найдено"
+                    },
+                    "422": {
+                        "description": "Валидация формы"
+                    },
+                    "429": {
+                        "description": "Бан запросов на 1 минуту"
+                    },
+                    "500": {
+                        "description": "Ошибка сервера"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": ""
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Категории компании"
+                ],
+                "summary": "Удаление категории из компании",
+                "operationId": "f9d3f43834986ac69de264f9365a6649",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID категории",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/v1.Company.CategoryResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Не авторизован"
+                    },
+                    "403": {
+                        "description": "Контент не доступен"
+                    },
+                    "404": {
+                        "description": "Не найдено"
+                    },
+                    "422": {
+                        "description": "Валидация формы"
+                    },
+                    "429": {
+                        "description": "Бан запросов на 1 минуту"
+                    },
+                    "500": {
+                        "description": "Ошибка сервера"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": ""
+                    }
+                ]
+            }
+        },
+        "/v1/company/category/{id}/products": {
+            "get": {
+                "tags": [
+                    "Категории компании"
+                ],
+                "summary": "Получение всех товаров категории в компании",
+                "operationId": "b7fb409434281e262a48042d2c5b6933",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID категории",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/v1.Company.CategoryResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Не авторизован"
+                    },
+                    "403": {
+                        "description": "Контент не доступен"
+                    },
+                    "404": {
+                        "description": "Не найдено"
+                    },
+                    "422": {
+                        "description": "Валидация формы"
+                    },
+                    "429": {
+                        "description": "Бан запросов на 1 минуту"
+                    },
+                    "500": {
+                        "description": "Ошибка сервера"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": ""
+                    }
+                ]
+            }
+        },
         "/v1/company/products": {
             "get": {
                 "tags": [
@@ -893,6 +1262,7 @@
     },
     "components": {
         "schemas": {
+            "v1.Company.CategoryResource": {},
             "v1.Company.DomainResource": {
                 "description": "Class DomainResource.",
                 "properties": {
@@ -981,8 +1351,20 @@
             "_CentralUser": {
                 "description": "App\\Models\\CentralUser"
             },
+            "_Brand": {
+                "description": "App\\Models\\Brand"
+            },
+            "_Category": {
+                "description": "App\\Models\\Category"
+            },
+            "_CategoryProduct": {
+                "description": "App\\Models\\CategoryProduct"
+            },
             "_Product": {
                 "description": "App\\Models\\Product"
+            },
+            "_Variant": {
+                "description": "App\\Models\\Variant"
             },
             "_TenantUser": {
                 "description": "App\\Models\\TenantUser"

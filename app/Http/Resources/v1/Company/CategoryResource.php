@@ -6,10 +6,10 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 
 /**
- * @OA\Schema (schema="v1.Company.ProductResource")
+ * @OA\Schema (schema="v1.Company.CategoryResource")
  */
 
-class ProductResource extends JsonResource
+class CategoryResource extends JsonResource
 {
 
     public function toArray($request)
@@ -17,9 +17,7 @@ class ProductResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'vendor_code' => $this->vendor_code,
-            'is_active' => $this->is_active,
-            'brand' => new BrandResource($this->whenLoaded('brand'))
+            'products' => ProductResource::collection($this->whenLoaded('products'))
         ];
     }
 }
