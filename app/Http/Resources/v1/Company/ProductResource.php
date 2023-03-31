@@ -19,7 +19,8 @@ class ProductResource extends JsonResource
             'name' => $this->name,
             'vendor_code' => $this->vendor_code,
             'is_active' => $this->is_active,
-            'brand' => new BrandResource($this->whenLoaded('brand'))
+            'brand' => new BrandResource($this->whenLoaded('brand')),
+            'categories' => CategoryResource::collection($this->whenLoaded('categories'))
         ];
     }
 }

@@ -24,8 +24,11 @@ class updateProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string',
-            'barcode' => 'required|string',
+            'name' => 'required|string|unique:products,name',
+            'vendor_code' => 'required|string',
+            'categories_id' => 'array',
+            'categories_id.*' => 'exists:categories,id',
+            'brand_id' => 'integer|exists:brands,id',
         ];
     }
 }

@@ -34,6 +34,7 @@ class Brand extends Model
         ColumnFillable;
 
     public $table = 'brands';
+    public $timestamps = true;
 
     public function products(){
         return $this->hasMany(Product::class, 'brand_id', 'id');

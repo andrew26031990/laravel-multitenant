@@ -34,6 +34,7 @@ class Product extends Model
         ColumnFillable;
 
     public $table = 'products';
+    public $timestamps = true;
 
     public function brand(){
         return $this->belongsTo(Brand::class);

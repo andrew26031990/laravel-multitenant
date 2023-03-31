@@ -26,7 +26,10 @@ class ProductService
     }
 
     public function store($attributes, $load = []){
-        return $this->productRepository->store($attributes, $load);
+        $product = $this->productRepository->store($attributes, $load);
+        $product->categories()->sync(((array)optional($attributes)['categories_id']));
+        $product->load($load);
+        return $product;
     }
 
     public function update($attributes, $id, $load = [], $associate = []){

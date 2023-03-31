@@ -4,7 +4,6 @@
 use App\Models\Tenant\User;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Route;
-//use OpenAI\Laravel\Facades\OpenAI;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
@@ -47,15 +46,42 @@ Route::group(
     }
 );
 
+Route::group(
+    [
+        'prefix' => 'v1',
+    ],
+    function () {
+        Route::group(
+            [
+                'prefix' => 'openai',
+            ],
+            function () {
+                Route::post('ask', [\App\Http\Controllers\OpenAIController::class, 'ask']);
+            });
+    });
+
 Route::get('openai', function (){
-    $result = OpenAI::completions()->create([
+    /*$result = OpenAI::completions()->create([
         'model' => 'text-davinci-003',
-        'prompt' => 'What is the universe?',
-        'max_tokens' => 10,
+        'prompt' => 'PHP is',
+    ]);*/
+
+    $client = OpenAI::client(env('OPENAI_API_KEY'));
+
+    $result = $client->completions()->create([
+        "model" => "text-davinci-003",
+        "temperature" => 0.7,
+        "top_p" => 1,
+        "frequency_penalty" => 0,
+        "presence_penalty" => 0,
+        'max_tokens' => 600,
+        'prompt' => sprintf('Write article about: %s', 'Bill Gates'),
     ]);
 
+    $content = trim($result['choices'][0]['text']);
+
     return response()->json([
-        'data' => $result
+        'data' => $content
     ]);
 });
 

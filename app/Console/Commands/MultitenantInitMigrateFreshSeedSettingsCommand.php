@@ -31,33 +31,37 @@ class MultitenantInitMigrateFreshSeedSettingsCommand extends Command
      */
     public function handle()
     {
-        if ($this->confirm('Are you sure you want to refresh project (not recomended in production)?')) {
-            $this->info('Drop tenants databases...');
-            foreach (Tenant::all() as $tenant) {
-                $db = "tenant_{$tenant->id}_db";
-                DB::connection('pgsql')->statement('DROP DATABASE IF EXISTS "' . $db . '" WITH (FORCE)');
+        if(app()->environment() != 'production'){
+            if ($this->confirm('Are you sure you want to refresh project in '.app()->environment().' mode (not recomended in production)?')) {
+                $this->info('Drop tenants databases...');
+                foreach (Tenant::all() as $tenant) {
+                    $db = "tenant_{$tenant->id}_db";
+                    DB::connection('pgsql')->statement('DROP DATABASE IF EXISTS "' . $db . '" WITH (FORCE)');
+                }
+                $this->info('Done');
+
+                $this->info('Migrate and fresh (central)...');
+                \Artisan::call('migrate:fresh');
+                $this->info('Done');
+
+                $this->info('Refreshing testing database...(central)');
+                \Artisan::call('migrate:fresh --env=testing');
+                $this->info('Done');
+
+                $this->info('Seeding database (central and tenant)');
+                \Artisan::call('db:seed');
+                $this->info('Done');
+
+                $this->info('Applying Laravel Passport keys...');
+                \Artisan::call('passport:keys');
+                $this->info('Done');
+
+                $this->info('Applying Laravel Passport personal keys...');
+                \Artisan::call('passport:client --personal --name=revo');
+                $this->info('Done');
             }
-            $this->info('Done');
-
-            $this->info('Migrate and fresh (central)...');
-            \Artisan::call('migrate:fresh');
-            $this->info('Done');
-
-            $this->info('Refreshing testing database...(central)');
-            \Artisan::call('migrate:fresh --env=testing');
-            $this->info('Done');
-
-            $this->info('Seeding database (central and tenant)');
-            \Artisan::call('db:seed');
-            $this->info('Done');
-
-            $this->info('Applying Laravel Passport keys...');
-            \Artisan::call('passport:keys');
-            $this->info('Done');
-
-            $this->info('Applying Laravel Passport personal keys...');
-            \Artisan::call('passport:client --personal --name=revo');
-            $this->info('Done');
+        }else{
+            $this->info('You are in production mode. Access denied!!');
         }
         return Command::SUCCESS;
     }

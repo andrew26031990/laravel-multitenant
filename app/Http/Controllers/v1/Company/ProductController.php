@@ -60,7 +60,9 @@ class ProductController extends Controller
      *            example=
      *            {
      *	           "name": "Груша",
-     *	           "barcode": "123456789"
+     *	           "barcode": "123456789",
+     *              "categories_id": {1,2},
+     *              "brand_id": 1
      *             }
      *          ),
      *   ),
@@ -81,7 +83,7 @@ class ProductController extends Controller
      */
     public function store(storeProductRequest $request)
     {
-        return new ProductResource($this->productService->store($request->validated()));
+        return new ProductResource($this->productService->store($request->validated(), ['brand', 'categories']));
     }
 
     /**

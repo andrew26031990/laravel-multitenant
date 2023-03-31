@@ -33,6 +33,7 @@ class CategoryProduct extends Model
         ColumnFillable;
 
     public $table = 'category_product';
+    public $timestamps = true;
 
     //protected $connection = 'pgsql';
 

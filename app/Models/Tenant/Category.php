@@ -34,6 +34,7 @@ class Category extends Model
         ColumnFillable;
 
     public $table = 'categories';
+    public $timestamps = true;
 
     public function products(){
         return $this->belongsToMany(Product::class);

@@ -34,6 +34,7 @@ class Variant extends Model
         ColumnFillable;
 
     public $table = 'variants';
+    public $timestamps = true;
 
     public function product(){
         return $this->belongsTo(Product::class);

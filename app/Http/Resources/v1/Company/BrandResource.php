@@ -6,7 +6,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 
 /**
- * @OA\Schema (schema="BrandResource")
+ * @OA\Schema (schema="v1.Company.BrandResource")
  */
 
 class BrandResource extends JsonResource

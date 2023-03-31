@@ -15,9 +15,8 @@ return new class extends Migration
     {
         Schema::create('variants', function (Blueprint $table) {
             $table->id()->comment('ID сущности');
-            $table->string('name')->comment('Название');
-            $table->string('modification')->comment('Модификация');
-            $table->string('barcode')->comment('Модификация');
+            $table->string('name')->comment('Наименование модификации');
+            $table->string('barcode')->comment('Баркод');
             $table->foreignId('product_id')->constrained('products');
             $table->timestamps();
             $table->softDeletes();

@@ -63,7 +63,6 @@ use Illuminate\Routing\Controller as BaseController;
  *         in="header",
  *     )
  *
- *
  * @OA\Server(
  *     url="http://localhost",
  *     description="API LOCAL SERVER"
@@ -80,10 +79,6 @@ use Illuminate\Routing\Controller as BaseController;
  *          serverVariable="tenant",
  *          default="tenant"
  *      )
- * )
- * @OA\Server(
- *     url="https://api.sbi.retailbox.uz",
- *     description="API DEVELOP SERVER"
  * )
  */
 

@@ -25,7 +25,7 @@ class User extends Authenticatable implements Syncable
 
     //protected $connection = 'pgsql';
     protected $guarded = [];
-    public $timestamps = false;
+    public $timestamps = true;
 
     public $keyType = 'string';
     protected $primaryKey = 'id';

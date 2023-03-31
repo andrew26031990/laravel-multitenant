@@ -28,13 +28,300 @@
                     "default": "tenant"
                 }
             }
-        },
-        {
-            "url": "https://api.sbi.retailbox.uz",
-            "description": "API DEVELOP SERVER"
         }
     ],
     "paths": {
+        "/v1/openai/ask": {
+            "post": {
+                "tags": [
+                    "Open AI"
+                ],
+                "summary": "Задать вопрос OpenAI",
+                "operationId": "b5765ccdc39a458091192222d5b90ee6",
+                "requestBody": {
+                    "description": "Тело запроса к OpenAI",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {},
+                            "example": {
+                                "question": "PHP is"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/v1.Company.ProductResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Не авторизован"
+                    },
+                    "403": {
+                        "description": "Контент не доступен"
+                    },
+                    "404": {
+                        "description": "Не найдено"
+                    },
+                    "422": {
+                        "description": "Валидация формы"
+                    },
+                    "429": {
+                        "description": "Бан запросов на 1 минуту"
+                    },
+                    "500": {
+                        "description": "Ошибка сервера"
+                    }
+                }
+            }
+        },
+        "/v1/company/brands": {
+            "get": {
+                "tags": [
+                    "Бренды компании"
+                ],
+                "summary": "Получение всех брендов компании",
+                "operationId": "ac0589139cec8f9c557cea906ebee94d",
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/v1.Company.BrandResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Не авторизован"
+                    },
+                    "403": {
+                        "description": "Контент не доступен"
+                    },
+                    "404": {
+                        "description": "Не найдено"
+                    },
+                    "422": {
+                        "description": "Валидация формы"
+                    },
+                    "429": {
+                        "description": "Бан запросов на 1 минуту"
+                    },
+                    "500": {
+                        "description": "Ошибка сервера"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": ""
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Бренды компании"
+                ],
+                "summary": "Добавление бренда в компанию",
+                "operationId": "7e25cb14b07d8b6673961f223fc0ded9",
+                "requestBody": {
+                    "description": "Тело запроса на добавление бренда в компанию",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {},
+                            "example": {
+                                "name": "Waikiki"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/v1.Company.BrandResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Не авторизован"
+                    },
+                    "403": {
+                        "description": "Контент не доступен"
+                    },
+                    "404": {
+                        "description": "Не найдено"
+                    },
+                    "422": {
+                        "description": "Валидация формы"
+                    },
+                    "429": {
+                        "description": "Бан запросов на 1 минуту"
+                    },
+                    "500": {
+                        "description": "Ошибка сервера"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": ""
+                    }
+                ]
+            }
+        },
+        "/v1/company/brands/{id}": {
+            "get": {
+                "tags": [
+                    "Бренды компании"
+                ],
+                "summary": "Просмотр бренда в компании",
+                "operationId": "437c36b055c32396df27c557bc34e3b1",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID бренда",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/v1.Company.BrandResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Не авторизован"
+                    },
+                    "403": {
+                        "description": "Контент не доступен"
+                    },
+                    "404": {
+                        "description": "Не найдено"
+                    },
+                    "422": {
+                        "description": "Валидация формы"
+                    },
+                    "429": {
+                        "description": "Бан запросов на 1 минуту"
+                    },
+                    "500": {
+                        "description": "Ошибка сервера"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": ""
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Бренды компании"
+                ],
+                "summary": "Удаление бренда из компании",
+                "operationId": "d5f40beb10823b6373891932481cda00",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID бренда",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/v1.Company.BrandResource"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Не авторизован"
+                    },
+                    "403": {
+                        "description": "Контент не доступен"
+                    },
+                    "404": {
+                        "description": "Не найдено"
+                    },
+                    "422": {
+                        "description": "Валидация формы"
+                    },
+                    "429": {
+                        "description": "Бан запросов на 1 минуту"
+                    },
+                    "500": {
+                        "description": "Ошибка сервера"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": ""
+                    }
+                ]
+            }
+        },
         "/v1/company/categories": {
             "get": {
                 "tags": [
@@ -462,7 +749,12 @@
                             "schema": {},
                             "example": {
                                 "name": "Груша",
-                                "barcode": "123456789"
+                                "barcode": "123456789",
+                                "categories_id": [
+                                    1,
+                                    2
+                                ],
+                                "brand_id": 1
                             }
                         }
                     }
@@ -1262,6 +1554,7 @@
     },
     "components": {
         "schemas": {
+            "v1.Company.BrandResource": {},
             "v1.Company.CategoryResource": {},
             "v1.Company.DomainResource": {
                 "description": "Class DomainResource.",
